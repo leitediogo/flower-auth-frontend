@@ -8,9 +8,12 @@
   "dependencies": {
     "auth0-lock": "^10.7.3",
     "jwt-decode": "^2.1.0",
+    "material-ui": "^0.16.6",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
-    "react-router": "^3.0.0"
+    "react-router": "^3.0.0",
+    "react-tap-event-plugin": "^2.0.1",
+    "superagent": "^3.3.1"
   },
   "scripts": {
     "start": "react-scripts start",

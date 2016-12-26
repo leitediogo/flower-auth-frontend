@@ -1,8 +1,9 @@
-import decode from 'jwt-decode';
-import {EventEmitter} from 'events';
-import React, {Component, PropTypes} from 'react';
-import {browserHistory} from 'react-router';
-import Auth0Lock from 'auth0-lock';
+import decode from 'jwt-decode'
+import {EventEmitter} from 'events'
+import React, {Component, PropTypes} from 'react'
+import {browserHistory} from 'react-router'
+import Auth0Lock from 'auth0-lock'
+import zynnia from './images/zynnia.jpg'
 
 const NEXT_PATH_KEY = 'next_path';
 const ID_TOKEN_KEY = 'id_token';
@@ -21,7 +22,11 @@ const lock = new Auth0Lock(
     auth: {
       redirectUrl: `${window.location.origin}${LOGIN_ROUTE}`,
       responseType: 'token'
-    }
+    },
+    theme: {
+    logo: zynnia,
+    primaryColor: '#00BCD4'
+  }  
   }
 );
 
