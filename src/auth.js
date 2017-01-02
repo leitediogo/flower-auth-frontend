@@ -3,13 +3,13 @@ import {EventEmitter} from 'events'
 import React, {Component, PropTypes} from 'react'
 import {browserHistory} from 'react-router'
 import Auth0Lock from 'auth0-lock'
-import zynnia from './images/zynnia.jpg'
+import flower from './images/gerbera.png'
 
 const NEXT_PATH_KEY = 'next_path';
 const ID_TOKEN_KEY = 'id_token';
 const ACCESS_TOKEN_KEY = 'access_token';
 const PROFILE_KEY = 'profile';
-const LOGIN_ROUTE = '/login';
+const LOGIN_ROUTE = '/';
 const ROOT_ROUTE = '/';
 
 if (!process.env.REACT_APP_AUTH0_CLIENT_ID || !process.env.REACT_APP_AUTH0_DOMAIN) {
@@ -24,7 +24,7 @@ const lock = new Auth0Lock(
       responseType: 'token'
     },
     theme: {
-    logo: zynnia,
+    logo: flower,
     primaryColor: '#00BCD4'
   }  
   }

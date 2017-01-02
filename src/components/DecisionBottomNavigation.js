@@ -5,6 +5,7 @@ import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNaviga
 import IconFavorites from 'material-ui/svg-icons/action/favorite'
 import IconRecents from 'material-ui/svg-icons/navigation/refresh'
 import AccountCircle from 'material-ui/svg-icons/action/account-circle'
+import { connectProfile } from '../auth'
 
 const recentsIcon = <IconRecents />
 const favoritesIcon = <IconFavorites />
@@ -24,9 +25,11 @@ class DecisionCatalogBottomNavigation extends Component {
     select = (index) => this.setState({ selectedIndex: index })
 
     render() {
+        const {profile} = this.props
         return (
             <MuiThemeProvider>
                 <div style={style}>
+                {(profile) ?
                     <Paper zDepth={1}>
                         <BottomNavigation selectedIndex={this.state.selectedIndex}>
                             <BottomNavigationItem
@@ -46,11 +49,11 @@ class DecisionCatalogBottomNavigation extends Component {
                                 />
                         </BottomNavigation>
                     </Paper>
+                     : ''}
                 </div>
             </MuiThemeProvider>
         )
     }
 }
 
-
-export default DecisionCatalogBottomNavigation
+export default connectProfile(DecisionCatalogBottomNavigation)

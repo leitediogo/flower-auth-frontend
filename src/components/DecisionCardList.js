@@ -3,6 +3,7 @@ import { Component } from 'react'
 import DecisionCard from './DecisionCard'
 import avatar from '../images/avatar.jpg'
 import DecisionAddFloatingButton from './DecisionAddFloatingButton'
+import { connectProfile } from '../auth'
 
 let style = {
     margin: 20,
@@ -10,9 +11,8 @@ let style = {
 }
 
 class DecisionCardList extends Component {
-   
-
     render() {
+        const {profile} = this.props
         let cards = [];
         for (var i = 0; i < this.props.decisions.length; i++) {
             cards.push(<DecisionCard decision={this.props.decisions[i]} avatar={avatar} key={i} />)
@@ -23,10 +23,10 @@ class DecisionCardList extends Component {
                 <br />
                 <br />
                 <div style={style}>{cards}</div>
-                <DecisionAddFloatingButton />
+                {(profile) ? <DecisionAddFloatingButton /> : ''}
             </div>
         )
     }
 }
 
-export default DecisionCardList
+export default connectProfile(DecisionCardList)

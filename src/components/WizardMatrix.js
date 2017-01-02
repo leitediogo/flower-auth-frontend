@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import TextField from 'material-ui/TextField'
 import Paper from 'material-ui/Paper'
 import FlatButton from 'material-ui/FlatButton'
 import { Table, TableRow, TableBody, TableRowColumn, TableHeader, TableHeaderColumn } from 'material-ui/Table'
 import Dialog from 'material-ui/Dialog'
+import MatrixInfo from './MatrixInfo'
 
 const styles = {
     paper: {
@@ -95,7 +95,6 @@ class WizardMatrix extends Component {
                                 {this.props.decision.choices.map((choice, index) => (
                                     <TableRow key={index}>
                                         <TableRowColumn key={index}>{choice.name}</TableRowColumn>
-
                                         {this.props.decision.criteria.map((criterion, i) => (
                                             criterion.name === '-' ? '' :
                                                 <TableRowColumn key={i}>{
@@ -117,19 +116,12 @@ class WizardMatrix extends Component {
                             modal={false}
                             open={this.state.open}
                             onRequestClose={this.handleCloseModal}>
-                            <br />
-                            col : {this.state.col}
-                            <br />
-                            row : {this.state.row}
-                            <hr />
-                            <TextField
-                                id="tmpCell"
-                                hintText="Insert information"
-                                floatingLabelText="Information"
-                                value={this.state.tmpCell}
-                                onChange={this.handleInputChange.bind(this)}
+                            <MatrixInfo
+                                col={this.state.col}
+                                row={this.state.row}
+                                tmpCell={this.state.tmpCell}
+                                handleInputChange={this.handleInputChange.bind(this)}
                                 />
-                            <br />
                         </Dialog>
                     </Paper>
                 </div>
