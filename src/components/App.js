@@ -9,6 +9,8 @@ import Wizard from './Wizard'
 import agent from 'superagent'
 import DecisionAppBar from './DecisionAppBar'
 import DecisionBottomNavigation from './DecisionBottomNavigation'
+
+
 // Needed for onTouchTap
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin();
@@ -55,7 +57,7 @@ class App extends Component {
           <Route onEnter={requireAuth}>
             {/* Place all authenticated routes here */}
             <Route path="/profile/edit" component={EditProfile} />
-             <Route path="/icons" component={IconTesting} />
+            <Route path="/icons" component={IconTesting} />
             <Route path="/matrix" component={MatrixTryOut} />
             <Route path="/wizard" component={Wizard} />
           </Route>

@@ -5,6 +5,9 @@ import FlatButton from 'material-ui/FlatButton'
 import { Table, TableRow, TableBody, TableRowColumn, TableHeader, TableHeaderColumn } from 'material-ui/Table'
 import Dialog from 'material-ui/Dialog'
 import MatrixInfo from './MatrixInfo'
+import AnimatedList from './AnimatedList'
+import AnimatedCard from './AnimatedCard'
+
 
 const styles = {
     paper: {
@@ -122,6 +125,8 @@ class WizardMatrix extends Component {
                                 tmpCell={this.state.tmpCell}
                                 handleInputChange={this.handleInputChange.bind(this)}
                                 />
+                            <AnimatedList/>
+                            
                         </Dialog>
                     </Paper>
                 </div>

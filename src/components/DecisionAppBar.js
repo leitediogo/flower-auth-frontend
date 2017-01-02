@@ -11,8 +11,6 @@ import {login} from '../auth'
 const styles = {
     title: {
         cursor: 'pointer'
-
-
     },
     bar: {
         backgroundColor: 'lightGrey'

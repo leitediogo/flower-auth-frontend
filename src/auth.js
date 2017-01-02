@@ -1,9 +1,9 @@
 import decode from 'jwt-decode'
-import {EventEmitter} from 'events'
-import React, {Component, PropTypes} from 'react'
-import {browserHistory} from 'react-router'
+import { EventEmitter } from 'events'
+import React, { Component, PropTypes } from 'react'
+import { browserHistory } from 'react-router'
 import Auth0Lock from 'auth0-lock'
-import flower from './images/gerbera.png'
+import flower from './images/flower-icon.png'
 
 const NEXT_PATH_KEY = 'next_path';
 const ID_TOKEN_KEY = 'id_token';
@@ -24,9 +24,12 @@ const lock = new Auth0Lock(
       responseType: 'token'
     },
     theme: {
-    logo: flower,
-    primaryColor: '#00BCD4'
-  }  
+      logo: flower,
+      primaryColor: 'lightGrey'
+    },
+    languageDictionary: {
+      title: "Flower Login"
+    }
   }
 );
 
@@ -36,7 +39,7 @@ lock.on('authenticated', authResult => {
   setIdToken(authResult.idToken);
   setAccessToken(authResult.accessToken);
   lock.getUserInfo(authResult.accessToken, (error, profile) => {
-    if (error) { return setProfile({error}); }
+    if (error) { return setProfile({ error }); }
     setProfile(profile);
     browserHistory.push(getNextPath());
     clearNextPath();
@@ -63,7 +66,7 @@ export function logout() {
 export function requireAuth(nextState, replace) {
   if (!isLoggedIn()) {
     setNextPath(nextState.location.pathname);
-    replace({pathname: LOGIN_ROUTE});
+    replace({ pathname: LOGIN_ROUTE });
   }
 }
 
@@ -75,7 +78,7 @@ export function connectProfile(WrappedComponent) {
 
     componentWillMount() {
       this.profileSubscription = subscribeToProfile((profile) => {
-        this.setState({profile});
+        this.setState({ profile });
       });
     }
 
@@ -89,7 +92,7 @@ export function connectProfile(WrappedComponent) {
           {...this.props}
           profile={this.state.profile}
           onUpdateProfile={this.onUpdateProfile}
-        />
+          />
       );
     }
 
@@ -104,7 +107,7 @@ connectProfile.PropTypes = {
   onUpdateProfile: PropTypes.func
 };
 
-export function fetchAsUser(input, init={}) {
+export function fetchAsUser(input, init = {}) {
   const headers = init.headers || {};
 
   return fetch(input, {
@@ -128,7 +131,7 @@ function subscribeToProfile(subscription) {
     subscription(getProfile());
 
     lock.getUserInfo(getAccessToken(), (error, profile) => {
-      if (error) { return setProfile({error}); }
+      if (error) { return setProfile({ error }); }
       setProfile(profile);
     });
   }
