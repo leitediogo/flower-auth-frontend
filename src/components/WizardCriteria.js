@@ -16,6 +16,10 @@ const styles = {
         textAlign: 'left',
         width: 500,
         height: 300
+    },
+    icons: {
+        height: 20,
+        width: 20
     }
 }
 
@@ -91,7 +95,9 @@ class WizardCriteria extends Component {
                                     <TableRow key={index} selected={row.selected}>
                                         <TableRowColumn>{row.name}</TableRowColumn>
                                         <TableRowColumn>{row.description}</TableRowColumn>
-                                        <TableRowColumn><FlatButton icon={iconDelete} href="/" /></TableRowColumn>
+                                        <TableRowColumn>
+                                            <FlatButton icon={iconDelete} href="/" />
+                                        </TableRowColumn>
                                     </TableRow>
                                 ))}
                             </TableBody>

@@ -4,9 +4,8 @@ import Paper from 'material-ui/Paper'
 import FlatButton from 'material-ui/FlatButton'
 import { Table, TableRow, TableBody, TableRowColumn, TableHeader, TableHeaderColumn } from 'material-ui/Table'
 import Dialog from 'material-ui/Dialog'
-import MatrixInfo from './MatrixInfo'
 import AnimatedList from './AnimatedList'
-import AnimatedCard from './AnimatedCard'
+
 
 
 const styles = {
@@ -118,15 +117,15 @@ class WizardMatrix extends Component {
                             actions={actions}
                             modal={false}
                             open={this.state.open}
-                            onRequestClose={this.handleCloseModal}>
-                            <MatrixInfo
+                            onRequestClose={this.handleCloseModal}
+                            autoScrollBodyContent={true}>
+                            <AnimatedList
                                 col={this.state.col}
                                 row={this.state.row}
                                 tmpCell={this.state.tmpCell}
-                                handleInputChange={this.handleInputChange.bind(this)}
+                                //handleInputChange={this.handleInputChange.bind(this)}
                                 />
-                            <AnimatedList/>
-                            
+
                         </Dialog>
                     </Paper>
                 </div>
