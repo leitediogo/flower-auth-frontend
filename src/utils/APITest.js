@@ -2,7 +2,7 @@ var agent = require("superagent")
 
 console.log('postProcess')
 
-agent.post('http://localhost:3000/api/Processes')
+agent.post('http://localhost:3007/api/Processes')
     .send({
         id: 2,
         name: 'testProcess',

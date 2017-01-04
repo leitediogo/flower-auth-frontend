@@ -6,11 +6,11 @@ Decision Status
 	Ponderation - Ponderated
 	Finished
 	Canceled
-	
+
 Participation Status
 	Subscribed
 	Not Subscribed
-	
+
 Participantion Type
 	Owner
 	Evaluator
@@ -30,4 +30,3 @@ Decision Category
 Decision Visibility
 	Public
 	Private
-	

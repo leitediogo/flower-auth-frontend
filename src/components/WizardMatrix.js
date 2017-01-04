@@ -6,8 +6,6 @@ import { Table, TableRow, TableBody, TableRowColumn, TableHeader, TableHeaderCol
 import Dialog from 'material-ui/Dialog'
 import AnimatedList from './AnimatedList'
 
-
-
 const styles = {
     paper: {
         margin: 20,
@@ -62,7 +60,6 @@ class WizardMatrix extends Component {
         this.setState({ open: false })
     }
 
-
     render() {
         const actions = [
             <FlatButton
@@ -107,7 +104,6 @@ class WizardMatrix extends Component {
                                                     })[0].description : ''
                                                 }</TableRowColumn>
                                         ))}
-
                                     </TableRow>
                                 ))}
                             </TableBody>
@@ -125,7 +121,6 @@ class WizardMatrix extends Component {
                                 tmpCell={this.state.tmpCell}
                                 //handleInputChange={this.handleInputChange.bind(this)}
                                 />
-
                         </Dialog>
                     </Paper>
                 </div>

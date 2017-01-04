@@ -9,7 +9,6 @@ import Wizard from './Wizard'
 import agent from 'superagent'
 import DecisionAppBar from './DecisionAppBar'
 import DecisionBottomNavigation from './DecisionBottomNavigation'
-import AnimatedCard from './AnimatedCard'
 import AnimatedList from './AnimatedList'
 
 // Needed for onTouchTap
@@ -61,8 +60,7 @@ class App extends Component {
             <Route path="/icons" component={IconTesting} />
             <Route path="/matrix" component={MatrixTryOut} />
             <Route path="/wizard" component={Wizard} />
-            <Route path="/animatedCard" component={AnimatedCard} />
-             <Route path="/animatedList" component={AnimatedList} />
+            <Route path="/animatedList" component={AnimatedList} />
           </Route>
         </Router>
         <DecisionBottomNavigation />
