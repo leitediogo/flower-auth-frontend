@@ -108,7 +108,7 @@ class Wizard extends Component {
 
     postDecision() {
         console.log('posting process!')
-        agent.post('http://localhost:3007/api/Decisions')
+        agent.post('http://localhost:3000/api/Decisions')
             .send({
                 name: this.state.decision.name,
                 definition: this.state.decision

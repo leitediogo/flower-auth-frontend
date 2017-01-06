@@ -9,7 +9,6 @@ import TextField from 'material-ui/TextField'
 import Thumbup from 'material-ui/svg-icons/action/thumb-up'
 import Thumbdown from 'material-ui/svg-icons/action/thumb-down'
 import Delete from 'material-ui/svg-icons/action/delete'
-import IconButton from 'material-ui/IconButton'
 
 let cardStyle = {
     margin: 20,

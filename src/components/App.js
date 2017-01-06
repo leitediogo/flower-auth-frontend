@@ -25,7 +25,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    agent.get('http://localhost:3007/api/Decisions')
+    agent.get('http://localhost:3000/api/Decisions')
       .then(function (res) {
         this.setState({ allDecisions: res.body });
         this.setState({ filteredDecisions: res.body })
