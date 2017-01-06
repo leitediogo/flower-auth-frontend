@@ -15,6 +15,9 @@ import AnimatedList from './AnimatedList'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin();
 
+const api_server_name=process.env.REACT_APP_API_SERVER_NAME
+const api_server_port=process.env.REACT_APP_API_SERVER_PORT
+
 class App extends Component {
   constructor() {
     super()
@@ -25,7 +28,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    agent.get('http://localhost:3000/api/Decisions')
+    agent.get('http://' + api_server_name + ':' + api_server_port + '/api/Decisions')
+    //agent.get('http://localhost:3000/api/Decisions')
       .then(function (res) {
         this.setState({ allDecisions: res.body });
         this.setState({ filteredDecisions: res.body })
