@@ -6,103 +6,133 @@ import { Card, CardHeader } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import avatar from '../images/avatar.jpg'
 import TextField from 'material-ui/TextField'
-import Thumbup from 'material-ui/svg-icons/action/thumb-up'
-import Thumbdown from 'material-ui/svg-icons/action/thumb-down'
+import ThumbUp from 'material-ui/svg-icons/action/thumb-up'
+import ThumbDown from 'material-ui/svg-icons/action/thumb-down'
 import Delete from 'material-ui/svg-icons/action/delete'
 
-let cardStyle = {
-    margin: 20,
-    textAlign: 'left'
-}
-
-const divStyleRight = {
-    marginRight: 20,
-    paddingTop: 10,
-    //marginLeft: 200,
-    //paddingBottom: '10px',
-    //alignItems: 'right',
-    //display: 'inline-flex',
-    //justifyContent: 'right',
-    //alignContent: 'flex-end'
-    //paddingLeft: '30px'
-    float: 'right'
-}
-
-const iconStyle = {
-    height: 20,
-    width: 20,
-}
-
-const divStyleLeft = {
+let styles = {
+    cardStyle: {
+        margin: 20,
+        textAlign: 'left',
+    },
+    divStyleRight: {
+        marginRight: 10,
+        paddingTop: 10,
+        display: 'inline-flex',
+        //justifyContent: 'right',
+        //alignContent: 'flex-end',
+        //paddingLeft: '50px',
+        float: 'right',
+        border: '3px solid black'
+    },
+    iconStyle: {
+        height: 20,
+        width: 20,
+    },
+    divStyleLeft: {
+        border: '3px solid red',
+        display: 'inline-flex'
+    },
+    divStyleCenter: {
+        textAlign: 'center',
+    }
 }
 
 class AnimatedList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            items: ['falcon', 'xwing', 'tie', 'phantom'],
-            info: ''
+            listOfInfo: [
+                { title: 'falcon', description: 'millenium falcon', votes: 0 },
+                { title: 'xwing', description: 'rebel fighter', votes: 0 },
+                { title: 'tie', description: 'imperial fighter', votes: 0 },
+            ],
+            title: '',
+            description: ''
         }
         this.handleAdd = this.handleAdd.bind(this)
     }
 
     handleAdd() {
-        const newItems = this.state.items.concat([
-            //prompt('Enter Information')
-            this.state.info
-        ]);
-        this.setState({ items: newItems, info: '' })
+        const newListOfInfo = this.state.listOfInfo.concat({ title: this.state.title, description: this.state.description, votes: 0 });
+        console.log(newListOfInfo)
+        this.setState({ listOfInfo: newListOfInfo, title: '', description: '' })
     }
 
     handleRemove(i) {
-        let newItems = this.state.items.slice()
-        newItems.splice(i, 1);
-        this.setState({ items: newItems })
+        console.log('handleRemove')
+        let newListOfInfo = this.state.listOfInfo.slice()
+        newListOfInfo.splice(i, 1);
+        this.setState({ listOfInfo: newListOfInfo })
     }
 
     handleInputChange = (e) => {
         let change = this.state
-        change.info = e.target.value
+        change[e.target.id] = e.target.value
         this.setState(change)
         console.log(this.state)
     }
 
+    handleThumbUp = () => {
+        console.log('handleThumbUp')
+    }
+
+    handleThumbDown = () => {
+        console.log('handleThumbDown')
+    }
+
+    createlistOfInfo = () => {
+        return (
+            //onClick={() => this.handleRemove(i)}
+            this.state.listOfInfo.map((info, i) => (
+                <div key={i}>
+                    <Card zDepth={3} style={styles.cardStyle} >
+                        <div style={styles.divStyleLeft}>
+                            <CardHeader
+                                title={info.title}
+                                subtitle={info.description}
+                                avatar={avatar}>
+                            </CardHeader>
+                        </div>
+                        <div style={styles.divStyleRight}>
+                            <ThumbUp style={styles.iconStyle} onClick={() => this.handleThumbUp()} />
+                            <ThumbDown style={styles.iconStyle} onClick={() => this.handleThumbDown()} />
+                            <div>
+                                <br />
+                                <b>{info.votes}</b>
+                                <center>
+                                    <Delete style={styles.iconStyle} onClick={() => this.handleRemove(i)} />
+                                </center>
+                            </div>
+                        </div>
+                    </Card>
+                </div>
+            ))
+        )
+    }
+
     render() {
-        const items = this.state.items.map((item, i) => (
-             <div key={item} onClick={() => this.handleRemove(i)}>
-                <Card zDepth={3} style={cardStyle}>
-                    <div style={divStyleRight}>
-                        <Thumbup style={iconStyle} onClick={() => { console.log('clicked') } } />
-                        <Thumbdown style={iconStyle} />
-                        <center>10</center>
-                        <center>
-                            <Delete style={iconStyle} />
-                        </center>
-                    </div>
-                    <div style={divStyleLeft}>
-                        <CardHeader
-                            title={item}
-                            subtitle="description"
-                            avatar={avatar}>
-                        </CardHeader>
-                    </div>
-                </Card>
-            </div>
-        ));
+
         return (
             <MuiThemeProvider>
-                <div>
+                <div style={styles.divStyleCenter}>
                     <br />
-                    col : {this.props.col}  row : {this.props.row}
-                    <hr />
                     <TextField
-                        id="info"
+                        id="title"
                         hintText="Insert information"
                         floatingLabelText="Information"
-                        value={this.state.info}
+                        value={this.state.title}
                         onChange={this.handleInputChange}
                         />
-
+                    <br />
+                    <TextField
+                        id="description"
+                        hintText="Insert Description"
+                        floatingLabelText="Description"
+                        value={this.state.description}
+                        onChange={this.handleInputChange}
+                        />
+                    <br />
                     <FlatButton
                         onClick={this.handleAdd}
                         label="Add" />
@@ -113,8 +143,10 @@ class AnimatedList extends Component {
                         transitionAppear={true}
                         transitionAppearTimeout={1000}
                         >
-                        {items}
+                        {this.createlistOfInfo()}
                     </ReactCSSTransitionGroup>
+                    <hr />
+                    col : {this.props.col}  row : {this.props.row}
                 </div>
             </MuiThemeProvider>
         )

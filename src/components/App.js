@@ -15,8 +15,8 @@ import AnimatedList from './AnimatedList'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin();
 
-const api_server_name=process.env.REACT_APP_API_SERVER_NAME
-const api_server_port=process.env.REACT_APP_API_SERVER_PORT
+const api_server_name = process.env.REACT_APP_API_SERVER_NAME
+const api_server_port = process.env.REACT_APP_API_SERVER_PORT
 
 class App extends Component {
   constructor() {
@@ -29,7 +29,7 @@ class App extends Component {
 
   componentDidMount() {
     agent.get('http://' + api_server_name + ':' + api_server_port + '/api/Decisions')
-    //agent.get('http://localhost:3000/api/Decisions')
+      //agent.get('http://localhost:3000/api/Decisions')
       .then(function (res) {
         this.setState({ allDecisions: res.body });
         this.setState({ filteredDecisions: res.body })
@@ -58,13 +58,15 @@ class App extends Component {
         <DecisionAppBar filterDecisions={this.filterDecisions.bind(this)} />
         <Router history={browserHistory}>
           <Route path="/" component={() => (<DecisionCardList decisions={this.state.filteredDecisions} />)} />
+          {/* Testing Routes */}
+          <Route path="/animatedList" component={AnimatedList} />
+          <Route path="/matrix" component={MatrixTryOut} />
+          <Route path="/icons" component={IconTesting} />
+          {/* End Testing Routes */}
           <Route onEnter={requireAuth}>
             {/* Place all authenticated routes here */}
             <Route path="/profile/edit" component={EditProfile} />
-            <Route path="/icons" component={IconTesting} />
-            <Route path="/matrix" component={MatrixTryOut} />
             <Route path="/wizard" component={Wizard} />
-            <Route path="/animatedList" component={AnimatedList} />
           </Route>
         </Router>
         <DecisionBottomNavigation />
