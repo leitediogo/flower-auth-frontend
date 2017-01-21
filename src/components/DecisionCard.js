@@ -17,7 +17,7 @@ class DecisionCard extends Component {
                         <CardHeader 
                             title="Created By" 
                             subtitle={this.props.decision.definition.createdBy} 
-                            avatar={this.props.avatar} 
+                            avatar={this.props.decision.definition.ownerAvatar} 
                             actAsExpander={true}
                             showExpandableButton={true}
                         />

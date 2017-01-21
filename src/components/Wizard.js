@@ -15,23 +15,33 @@ import WizardCriteria from './WizardCriteria'
 import WizardChoices from './WizardChoices'
 import WizardParticipants from './WizardParticipants'
 import WizardMatrix from './WizardMatrix'
+import { connectProfile } from '../auth'
+
+const api_server_name = process.env.REACT_APP_API_SERVER_NAME
+const api_server_port = process.env.REACT_APP_API_SERVER_PORT
 
 class Wizard extends Component {
 
+        //Set decision owner
+        //this.setState({owner: profile.nickname}, {createdBy: profile.nickname})
+        //console.log(profile.nickname)
+
     constructor(props, context) {
         super(props, context)
+        const {profile} = this.props
         this.state = {
             finished: false,
             stepIndex: 0,
             decision: {
                 name: '',
                 description: '',
-                status: 'Creation',
+                status: 'Creation',//Initial status
                 category: '',
-                createdBy: 'Diogo Leite',
-                owner: 'Diogo Leite',
+                createdBy: profile.name,
+                owner: profile.name,
+                ownerAvatar: profile.picture,
                 participants: [],
-                criteria: [{name: '-', description: ''}],
+                criteria: [{ name: '-', description: '' }],
                 choices: [],
                 info: []
             }
@@ -45,7 +55,7 @@ class Wizard extends Component {
         console.log(this.state)
     }
 
-    //Generalize selects per name
+    //TODO: Generalize selects per name
     handleSelectCategoryChange = (event, index, value) => {
         let change = this.state
         change.decision.category = value
@@ -74,7 +84,6 @@ class Wizard extends Component {
     }
 
     handleSaveCriteria(name, desc) {
-        //set state
         let change = this.state
         let criterionToPush = {
             description: desc,
@@ -85,7 +94,6 @@ class Wizard extends Component {
     }
 
     handleSaveChoice(name, desc) {
-        //set state
         let change = this.state
         let choiceToPush = {
             description: desc,
@@ -96,7 +104,6 @@ class Wizard extends Component {
     }
 
     handleSaveParticipant(name, role) {
-        //set state
         let change = this.state
         let participantToPush = {
             role: role,
@@ -107,8 +114,9 @@ class Wizard extends Component {
     }
 
     postDecision() {
+        //TODO: Handle Error
         console.log('posting process!')
-        agent.post('http://localhost:3000/api/Decisions')
+        agent.post('http://' + api_server_name + ':' + api_server_port + '/api/Decisions')
             .send({
                 name: this.state.decision.name,
                 definition: this.state.decision
@@ -127,23 +135,23 @@ class Wizard extends Component {
         switch (stepIndex) {
             case 0:
                 return (
-                    <WizardContext decision={this.state.decision} handleInputChange={this.handleInputChange.bind(this)} handleSelectCategoryChange={this.handleSelectCategoryChange.bind(this)}/>)
+                    <WizardContext decision={this.state.decision} handleInputChange={this.handleInputChange.bind(this)} handleSelectCategoryChange={this.handleSelectCategoryChange.bind(this)} />)
             case 1:
                 return (
-                    <WizardCriteria decision={this.state.decision} handleSaveCriteria={this.handleSaveCriteria.bind(this)}/>)
+                    <WizardCriteria decision={this.state.decision} handleSaveCriteria={this.handleSaveCriteria.bind(this)} />)
             case 2:
                 return (
                     <WizardChoices decision={this.state.decision} handleSaveChoice={this.handleSaveChoice.bind(this)} />)
             case 3:
                 return (
-                    <WizardParticipants decision={this.state.decision} handleSaveParticipant={this.handleSaveParticipant.bind(this)}/>)
+                    <WizardParticipants decision={this.state.decision} handleSaveParticipant={this.handleSaveParticipant.bind(this)} />)
             case 4:
                 return (<WizardMatrix decision={this.state.decision} />)
             default:
                 return 'Houston? Wizard has gone to default case.'
         }
     }
-    
+
     render() {
         const {stepIndex} = this.state
         return (
@@ -192,4 +200,4 @@ class Wizard extends Component {
     }
 }
 
-export default Wizard
+export default connectProfile(Wizard)

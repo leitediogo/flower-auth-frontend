@@ -4,7 +4,7 @@ import Paper from 'material-ui/Paper'
 import FlatButton from 'material-ui/FlatButton'
 import { Table, TableRow, TableBody, TableRowColumn, TableHeader, TableHeaderColumn } from 'material-ui/Table'
 import Dialog from 'material-ui/Dialog'
-import AnimatedList from './AnimatedList'
+import UpVote from './UpVote'
 
 const styles = {
     paper: {
@@ -115,7 +115,7 @@ class WizardMatrix extends Component {
                             open={this.state.open}
                             onRequestClose={this.handleCloseModal}
                             autoScrollBodyContent={true}>
-                            <AnimatedList
+                            <UpVote
                                 col={this.state.col}
                                 row={this.state.row}
                                 tmpCell={this.state.tmpCell}

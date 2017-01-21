@@ -33,7 +33,7 @@ import Class from 'material-ui/svg-icons/action/class'
 
 //check https://www.materialui.co/icons
 
-class IconTesting extends Component {
+class TestIcons extends Component {
     render() {
         return (
             <MuiThemeProvider>
@@ -81,4 +81,4 @@ class IconTesting extends Component {
     }
 }
 
-export default IconTesting;
+export default TestIcons;

@@ -21,7 +21,7 @@ const styles = {
     }
 }
 
-class MatrixTryOut extends Component {
+class TestMatrix extends Component {
 
     constructor(props, context) {
         super(props, context)
@@ -147,4 +147,4 @@ class MatrixTryOut extends Component {
     }
 }
 
-export default MatrixTryOut
+export default TestMatrix

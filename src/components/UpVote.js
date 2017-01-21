@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group' // ES6
-import './AnimatedList.css'
+import './UpVote.css'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Card, CardHeader } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
@@ -38,7 +38,7 @@ let styles = {
     }
 }
 
-class AnimatedList extends Component {
+class UpVote extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -160,4 +160,4 @@ class AnimatedList extends Component {
     }
 }
 
-export default AnimatedList
+export default UpVote

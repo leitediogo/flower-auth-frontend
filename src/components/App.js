@@ -3,13 +3,14 @@ import { Router, Route, browserHistory } from 'react-router'
 import { requireAuth } from '../auth'
 import EditProfile from './EditProfile'
 import DecisionCardList from './DecisionCardList'
-import IconTesting from './IconTesting'
-import MatrixTryOut from './MatrixTryOut'
+import TestIcons from './TestIcons'
+import TestMatrix from './TestMatrix'
 import Wizard from './Wizard'
 import agent from 'superagent'
 import DecisionAppBar from './DecisionAppBar'
 import DecisionBottomNavigation from './DecisionBottomNavigation'
-import AnimatedList from './AnimatedList'
+import UpVote from './UpVote'
+import TestProfile from './TestProfile'
 
 // Needed for onTouchTap
 import injectTapEventPlugin from 'react-tap-event-plugin'
@@ -59,14 +60,15 @@ class App extends Component {
         <Router history={browserHistory}>
           <Route path="/" component={() => (<DecisionCardList decisions={this.state.filteredDecisions} />)} />
           {/* Testing Routes */}
-          <Route path="/animatedList" component={AnimatedList} />
-          <Route path="/matrix" component={MatrixTryOut} />
-          <Route path="/icons" component={IconTesting} />
+          <Route path="/upvote" component={UpVote} />
+          <Route path="/testmatrix" component={TestMatrix} />
+          <Route path="/testicons" component={TestIcons} />
           {/* End Testing Routes */}
           <Route onEnter={requireAuth}>
             {/* Place all authenticated routes here */}
             <Route path="/profile/edit" component={EditProfile} />
             <Route path="/wizard" component={Wizard} />
+            <Route path="/testprofile" component={TestProfile} />
           </Route>
         </Router>
         <DecisionBottomNavigation />
