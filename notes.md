@@ -16,6 +16,7 @@ Participantion Type
 	Evaluator
 	Expert Evaluator
 	Viewer
+	Peer
 
 Decision Category
 	Government

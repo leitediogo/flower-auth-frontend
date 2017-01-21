@@ -23,14 +23,14 @@ let styles = {
         //alignContent: 'flex-end',
         //paddingLeft: '50px',
         float: 'right',
-        border: '3px solid black'
+        //border: '3px solid black'
     },
     iconStyle: {
         height: 20,
         width: 20,
     },
     divStyleLeft: {
-        border: '3px solid red',
+        //border: '3px solid red',
         display: 'inline-flex'
     },
     divStyleCenter: {
@@ -73,12 +73,20 @@ class AnimatedList extends Component {
         console.log(this.state)
     }
 
-    handleThumbUp = () => {
+    handleThumbUp = (i) => {
         console.log('handleThumbUp')
+        console.log(i)
+        let change = this.state
+        change.listOfInfo[i].votes += 1
+        this.setState(change)
     }
 
-    handleThumbDown = () => {
+    handleThumbDown = (i) => {
         console.log('handleThumbDown')
+        console.log(i)
+        let change = this.state
+        change.listOfInfo[i].votes -= 1
+        this.setState(change)
     }
 
     createlistOfInfo = () => {
@@ -95,11 +103,10 @@ class AnimatedList extends Component {
                             </CardHeader>
                         </div>
                         <div style={styles.divStyleRight}>
-                            <ThumbUp style={styles.iconStyle} onClick={() => this.handleThumbUp()} />
-                            <ThumbDown style={styles.iconStyle} onClick={() => this.handleThumbDown()} />
+                        <b>{info.votes}&nbsp;</b>
+                            <ThumbUp style={styles.iconStyle} onClick={() => this.handleThumbUp(i)} />
+                            <ThumbDown style={styles.iconStyle} onClick={() => this.handleThumbDown(i)} />
                             <div>
-                                <br />
-                                <b>{info.votes}</b>
                                 <center>
                                     <Delete style={styles.iconStyle} onClick={() => this.handleRemove(i)} />
                                 </center>
