@@ -74,6 +74,7 @@ class Wizard extends Component {
     handleFinishWizard = () => {
         this.postDecision()
         browserHistory.push('/')
+        window.location.reload()
     }
 
     handlePrevWizard = () => {
