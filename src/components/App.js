@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Router, Route, browserHistory } from 'react-router'
 import { requireAuth } from '../auth'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import EditProfile from './EditProfile'
 import DecisionCardList from './DecisionCardList'
 import TestIcons from './TestIcons'
@@ -57,26 +58,28 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
-        <DecisionAppBar filterDecisions={this.filterDecisions.bind(this)} />
-        <Router history={browserHistory}>
-          <Route path="/" component={() => (<DecisionCardList decisions={this.state.filteredDecisions} />)} />
-          {/* Testing Routes */}
-          <Route path="/upvote" component={UpVote} />
-          <Route path="/testmatrix" component={TestMatrix} />
-          <Route path="/testicons" component={TestIcons} />
-          {/* End Testing Routes */}
-          <Route onEnter={requireAuth}>
-            {/* Place all authenticated routes here */}
-            <Route path="/profile/edit" component={EditProfile} />
-            <Route path="/wizard" component={Wizard} />
-            <Route path="/testprofile" component={TestProfile} />
-            <Route path="/decisionedit" component={DecisionEdit} />
-            <Route path="/decisionview" component={DecisionView} />
-          </Route>
-        </Router>
-        <DecisionBottomNavigation />
-      </div>
+      <MuiThemeProvider>
+        <div>
+          <DecisionAppBar filterDecisions={this.filterDecisions.bind(this)} />
+          <Router history={browserHistory}>
+            <Route path="/" component={() => (<DecisionCardList decisions={this.state.filteredDecisions} />)} />
+            {/* Testing Routes */}
+            <Route path="/upvote" component={UpVote} />
+            <Route path="/testmatrix" component={TestMatrix} />
+            <Route path="/testicons" component={TestIcons} />
+            {/* End Testing Routes */}
+            <Route onEnter={requireAuth}>
+              {/* Place all authenticated routes here */}
+              <Route path="/profile/edit" component={EditProfile} />
+              <Route path="/wizard" component={Wizard} />
+              <Route path="/testprofile" component={TestProfile} />
+              <Route path="/decisionedit" component={DecisionEdit} />
+              <Route path="/decisionview" component={DecisionView} />
+            </Route>
+          </Router>
+          <DecisionBottomNavigation />
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
