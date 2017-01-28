@@ -31,6 +31,25 @@ import AttachMoney from 'material-ui/svg-icons/editor/attach-money'
 import Extension from 'material-ui/svg-icons/action/extension'
 import Class from 'material-ui/svg-icons/action/class'
 
+
+//Check Material svg icons by path
+import { blue500, red500, greenA200 } from 'material-ui/styles/colors';
+import SvgIcon from 'material-ui/SvgIcon';
+const iconStyles = {
+    marginRight: 24,
+};
+const HomeIcon = (props) => (
+    <SvgIcon {...props}>
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+    </SvgIcon>
+);
+
+import ActionFlightTakeoff from 'material-ui/svg-icons/action/flight-takeoff';
+import ThumbUp from 'material-ui/svg-icons/action/thumb-up'
+import ThumbDown from 'material-ui/svg-icons/action/thumb-down'
+
+
+
 //check https://www.materialui.co/icons
 
 class TestIcons extends Component {
@@ -38,9 +57,16 @@ class TestIcons extends Component {
         return (
             <MuiThemeProvider>
                 <div>
-                <br/>
-                <br/>
-                <br/>
+                    <br />
+                    <br />
+                    <br />
+                    <div>
+                        <ActionFlightTakeoff style={iconStyles} color={red500} />
+                        <ThumbUp style={iconStyles} color={red500} />
+                        <HomeIcon style={iconStyles} />
+                        <HomeIcon style={iconStyles} color={blue500} />
+                        <HomeIcon style={iconStyles} color={red500} hoverColor={greenA200} />
+                    </div>
                     <h1> Actions </h1>
                     <Visibility />
                     <VisibilityOff />
@@ -58,23 +84,23 @@ class TestIcons extends Component {
                     <Allout />
                     <Android />
                     <Announcement />
-                    <Supervisor/>
+                    <Supervisor />
 
                     <h1> Banking </h1>
-                    <Business /> : Mortgage <br/>
-                    <Supervisor/>  :Human Resources <br/>
-                    <Gavel/> : Risk & Compliance <br/>
-                    <Language/> : International <br/>
-                    <CreditCard/> : Cards <br/>
-                    <LocalATM/> : Payments <br/>
-                    <MonetizationOn/> : Trade Finance <br/>
-                    <Accountbalance/> : Operations & Execution <br/>
-                    <InsertChart/> : Marketing <br/>
-                    <AttachMoney/> : Sales & Service <br/>
-                    <Extension/> : IT Management <br/>
-                    <Class/> : Loans <br/>
+                    <Business /> : Mortgage <br />
+                    <Supervisor />  :Human Resources <br />
+                    <Gavel /> : Risk & Compliance <br />
+                    <Language /> : International <br />
+                    <CreditCard /> : Cards <br />
+                    <LocalATM /> : Payments <br />
+                    <MonetizationOn /> : Trade Finance <br />
+                    <Accountbalance /> : Operations & Execution <br />
+                    <InsertChart /> : Marketing <br />
+                    <AttachMoney /> : Sales & Service <br />
+                    <Extension /> : IT Management <br />
+                    <Class /> : Loans <br />
 
-                    
+
                 </div>
             </MuiThemeProvider>
         );

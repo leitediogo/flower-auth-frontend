@@ -11,6 +11,8 @@ import DecisionAppBar from './DecisionAppBar'
 import DecisionBottomNavigation from './DecisionBottomNavigation'
 import UpVote from './UpVote'
 import TestProfile from './TestProfile'
+import DecisionEdit from './DecisionEdit'
+import DecisionView from './DecisionView'
 
 // Needed for onTouchTap
 import injectTapEventPlugin from 'react-tap-event-plugin'
@@ -69,6 +71,8 @@ class App extends Component {
             <Route path="/profile/edit" component={EditProfile} />
             <Route path="/wizard" component={Wizard} />
             <Route path="/testprofile" component={TestProfile} />
+            <Route path="/decisionedit" component={DecisionEdit} />
+            <Route path="/decisionview" component={DecisionView} />
           </Route>
         </Router>
         <DecisionBottomNavigation />

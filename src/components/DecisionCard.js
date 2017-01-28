@@ -30,8 +30,8 @@ class DecisionCard extends Component {
                             <p>decision detail</p>
                         </CardMedia>
                         <CardActions expandable={true}>
-                            <FlatButton label="Edit" />
-                            <FlatButton label="Open" />
+                            <FlatButton label="Edit" href="\decisionedit"/>
+                            <FlatButton label="View" href="\decisionview"/>
                         </CardActions>
                     </Card>
                 </div>
