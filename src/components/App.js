@@ -15,7 +15,8 @@ import TestProfile from './TestProfile'
 import DecisionEdit from './DecisionEdit'
 import DecisionView from './DecisionView'
 
-// Needed for onTouchTap
+//Some components use react-tap-event-plugin (https://github.com/zilverline/react-tap-event-plugin) to listen for touch events (onTouchTap) because onClick is not fast enough (http://stackoverflow.com/a/34015469/988941)
+//This dependency is temporary and will eventually go away. Until then, be sure to inject this plugin at the start of your app.
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin();
 
