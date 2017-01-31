@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Card, CardActions, CardHeader, CardTitle, CardText, CardMedia } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
+import { browserHistory } from 'react-router'
 
 let style = {
     margin: 20,
@@ -8,6 +9,16 @@ let style = {
 }
 
 class DecisionCard extends Component {
+
+    handleEdit = () => {
+        console.log('edit')
+        browserHistory.push({
+            pathname: '/decisionedit',
+            //search: '?process=' + this.props.process.name,
+            state: { decision: this.props.decision.definition }
+        })
+    }
+
     render() {
         return (
                 <div>
@@ -28,7 +39,7 @@ class DecisionCard extends Component {
                             <p>decision detail</p>
                         </CardMedia>
                         <CardActions expandable={true}>
-                            <FlatButton label="Edit" href="\decisionedit"/>
+                            <FlatButton label="Edit" onClick={this.handleEdit}/>
                             <FlatButton label="View" href="\decisionview"/>
                         </CardActions>
                     </Card>

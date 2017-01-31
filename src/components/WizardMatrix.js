@@ -23,12 +23,7 @@ class WizardMatrix extends Component {
             row: 0,
             col: 0,
             tmpCell: '',
-            info: [{ row: '0', col: '3', description: 'desc1' },
-            { row: '0', col: '4', description: 'desc2' },
-            { row: '0', col: '5', description: 'desc3' },
-            { row: '1', col: '3', description: 'desc4' },
-            { row: '1', col: '4', description: 'desc5' },
-            { row: '1', col: '5', description: 'desc6' }]
+            info: []
         }
     }
 
