@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Paper from 'material-ui/Paper'
 import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation'
 import IconFavorites from 'material-ui/svg-icons/action/favorite'
@@ -27,7 +26,6 @@ class DecisionCatalogBottomNavigation extends Component {
     render() {
         const {profile} = this.props
         return (
-            <MuiThemeProvider>
                 <div style={style}>
                 {(profile) ?
                     <Paper zDepth={1}>
@@ -51,7 +49,6 @@ class DecisionCatalogBottomNavigation extends Component {
                     </Paper>
                      : ''}
                 </div>
-            </MuiThemeProvider>
         )
     }
 }

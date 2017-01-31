@@ -1,14 +1,8 @@
 import React, { Component } from 'react'
 import agent from 'superagent'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
-import {
-    Step,
-    Stepper,
-    StepLabel,
-} from 'material-ui/Stepper'
-
+import { Step, Stepper, StepLabel } from 'material-ui/Stepper'
 import { browserHistory } from 'react-router'
 import WizardContext from './WizardContext'
 import WizardCriteria from './WizardCriteria'
@@ -22,9 +16,9 @@ const api_server_port = process.env.REACT_APP_API_SERVER_PORT
 
 class Wizard extends Component {
 
-        //Set decision owner
-        //this.setState({owner: profile.nickname}, {createdBy: profile.nickname})
-        //console.log(profile.nickname)
+    //Set decision owner
+    //this.setState({owner: profile.nickname}, {createdBy: profile.nickname})
+    //console.log(profile.nickname)
 
     constructor(props, context) {
         super(props, context)
@@ -156,7 +150,6 @@ class Wizard extends Component {
     render() {
         const {stepIndex} = this.state
         return (
-            <MuiThemeProvider>
                 <div style={{ width: '100%', maxWidth: 700, margin: 'auto' }}>
                     <br /><br /><br />
                     <Stepper activeStep={stepIndex}>
@@ -193,10 +186,8 @@ class Wizard extends Component {
                                     />
                             </div>
                         </div>
-
                     </div>
                 </div>
-            </MuiThemeProvider>
         )
     }
 }

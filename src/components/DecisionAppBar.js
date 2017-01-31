@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppBar from 'material-ui/AppBar'
 import DecisionAppBarRightIconMenu from './DecisionAppBarRightIconMenu'
 import DecisionAppBarLeftIconMenu from './DecisionAppBarLeftIconMenu'
@@ -13,7 +12,7 @@ const styles = {
         cursor: 'pointer'
     },
     bar: {
-        backgroundColor: 'lightGrey'
+        //backgroundColor: 'lightGrey'
     }
 }
 
@@ -27,7 +26,6 @@ class DecisionAppBar extends Component {
     render() {
         const {profile} = this.props;
         return (
-            <MuiThemeProvider>
                 <div>
                     <AppBar
                         title={<span style={styles.title}>Flower</span>}
@@ -37,7 +35,6 @@ class DecisionAppBar extends Component {
                         iconElementLeft={<DecisionAppBarLeftIconMenu filterDecisions={this.props.filterDecisions} />}
                         />
                 </div>
-            </MuiThemeProvider>
         )
     }
 }

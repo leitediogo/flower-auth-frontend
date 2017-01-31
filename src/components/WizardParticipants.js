@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import TextField from 'material-ui/TextField'
 import Paper from 'material-ui/Paper'
 import IconDelete from 'material-ui/svg-icons/action/delete'
@@ -71,7 +70,6 @@ class WizardParticipants extends Component {
 
     render() {
         return (
-            <MuiThemeProvider>
                 <div>
                     <Paper zDepth={0} style={styles.paper}>
                         <Table>
@@ -122,7 +120,6 @@ class WizardParticipants extends Component {
                         </Dialog>
                     </Paper>
                 </div>
-            </MuiThemeProvider>
         )
     }
 }

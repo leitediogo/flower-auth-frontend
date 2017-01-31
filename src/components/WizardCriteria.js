@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import TextField from 'material-ui/TextField'
 import Paper from 'material-ui/Paper'
 import IconDelete from 'material-ui/svg-icons/action/delete'
@@ -75,60 +74,58 @@ class WizardCriteria extends Component {
 
     render() {
         return (
-            <MuiThemeProvider>
-                <div>
-                    <Paper zDepth={0} style={styles.paper}>
-                        <Table>
-                            <TableHeader
-                                displaySelectAll={false}
-                                adjustForCheckbox={false}
-                                enableSelectAll={false}
-                                >
-                                <TableRow>
-                                    <TableHeaderColumn>Name</TableHeaderColumn>
-                                    <TableHeaderColumn>Description</TableHeaderColumn>
-                                    <TableHeaderColumn>Action</TableHeaderColumn>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody displayRowCheckbox={false} >
-                                {this.props.decision.criteria.map((row, index) => (
-                                    <TableRow key={index} selected={row.selected}>
-                                        <TableRowColumn>{row.name}</TableRowColumn>
-                                        <TableRowColumn>{row.description}</TableRowColumn>
-                                        <TableRowColumn>
-                                            <FlatButton icon={iconDelete} href="/" />
-                                        </TableRowColumn>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                        <RaisedButton label="Add Criteria" onTouchTap={this.handleOpenModal} fullWidth={true} />
-                        <Dialog
-                            title="Add Criteria"
-                            actions={this.actions}
-                            modal={false}
-                            open={this.state.open}
-                            onRequestClose={this.handleCloseModal}
+            <div>
+                <Paper zDepth={0} style={styles.paper}>
+                    <Table>
+                        <TableHeader
+                            displaySelectAll={false}
+                            adjustForCheckbox={false}
+                            enableSelectAll={false}
                             >
-                            <TextField
-                                id="tmpCritName"
-                                hintText="Insert Criterion Name"
-                                floatingLabelText="Criterion Name"
-                                value={this.state.tmpCritName}
-                                onChange={this.handleInputChange.bind(this)}
-                                />
-                            <br />
-                            <TextField
-                                id="tmpCritDesc"
-                                hintText="Insert Criterion Description"
-                                floatingLabelText="Criterion Description"
-                                value={this.state.tmpCritDesc}
-                                onChange={this.handleInputChange.bind(this)}
-                                />
-                        </Dialog>
-                    </Paper>
-                </div>
-            </MuiThemeProvider>
+                            <TableRow>
+                                <TableHeaderColumn>Name</TableHeaderColumn>
+                                <TableHeaderColumn>Description</TableHeaderColumn>
+                                <TableHeaderColumn>Action</TableHeaderColumn>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody displayRowCheckbox={false} >
+                            {this.props.decision.criteria.map((row, index) => (
+                                <TableRow key={index} selected={row.selected}>
+                                    <TableRowColumn>{row.name}</TableRowColumn>
+                                    <TableRowColumn>{row.description}</TableRowColumn>
+                                    <TableRowColumn>
+                                        <FlatButton icon={iconDelete} href="/" />
+                                    </TableRowColumn>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                    <RaisedButton label="Add Criteria" onTouchTap={this.handleOpenModal} fullWidth={true} />
+                    <Dialog
+                        title="Add Criteria"
+                        actions={this.actions}
+                        modal={false}
+                        open={this.state.open}
+                        onRequestClose={this.handleCloseModal}
+                        >
+                        <TextField
+                            id="tmpCritName"
+                            hintText="Insert Criterion Name"
+                            floatingLabelText="Criterion Name"
+                            value={this.state.tmpCritName}
+                            onChange={this.handleInputChange.bind(this)}
+                            />
+                        <br />
+                        <TextField
+                            id="tmpCritDesc"
+                            hintText="Insert Criterion Description"
+                            floatingLabelText="Criterion Description"
+                            value={this.state.tmpCritDesc}
+                            onChange={this.handleInputChange.bind(this)}
+                            />
+                    </Dialog>
+                </Paper>
+            </div>
         )
     }
 }

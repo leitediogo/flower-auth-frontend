@@ -1,28 +1,24 @@
 import React, { Component } from 'react'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
+import FloatingActionButton from 'material-ui/FloatingActionButton'
+import ContentAdd from 'material-ui/svg-icons/content/add'
 
 let style = {
     margin: 12,
     marginRight: 20,
-    marginLeft: 20, 
+    marginLeft: 20,
     position: "fixed",
-    bottom:"8%",
-    right:"1%"
+    bottom: "8%",
+    right: "1%"
 }
 
 class DecisionAddFloatingButton extends Component {
     render() {
         return (
-            <MuiThemeProvider>
-                <FloatingActionButton style={style} href="\wizard">
-                    <ContentAdd />
-                </FloatingActionButton>
-            </MuiThemeProvider>
+            <FloatingActionButton style={style} href="\wizard">
+                <ContentAdd />
+            </FloatingActionButton>
         )
     }
 }
-
 
 export default DecisionAddFloatingButton

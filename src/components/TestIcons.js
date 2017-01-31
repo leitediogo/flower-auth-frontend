@@ -62,6 +62,7 @@ class TestIcons extends Component {
                     <br />
                     <div>
                         <ActionFlightTakeoff style={iconStyles} color={red500} />
+                        <ThumbDown style={iconStyles} color={red500} />
                         <ThumbUp style={iconStyles} color={red500} />
                         <HomeIcon style={iconStyles} />
                         <HomeIcon style={iconStyles} color={blue500} />

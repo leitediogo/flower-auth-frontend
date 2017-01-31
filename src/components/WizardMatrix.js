@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Paper from 'material-ui/Paper'
 import FlatButton from 'material-ui/FlatButton'
 import { Table, TableRow, TableBody, TableRowColumn, TableHeader, TableHeaderColumn } from 'material-ui/Table'
@@ -75,56 +74,54 @@ class WizardMatrix extends Component {
                 />,
         ]
         return (
-            <MuiThemeProvider>
-                <div>
-                    <Paper zDepth={1} style={styles.paper}>
-                        <Table onCellClick={this.handleInformationRow} fixedHeader={true}>
-                            <TableHeader
-                                displaySelectAll={false}
-                                adjustForCheckbox={false}
-                                enableSelectAll={false}
-                                >
-                                <TableRow>
-                                    {this.props.decision.criteria.map((criterion, index) => (
-                                        <TableHeaderColumn key={index}>{criterion.name}</TableHeaderColumn>
+            <div>
+                <Paper zDepth={1} style={styles.paper}>
+                    <Table onCellClick={this.handleInformationRow} fixedHeader={true}>
+                        <TableHeader
+                            displaySelectAll={false}
+                            adjustForCheckbox={false}
+                            enableSelectAll={false}
+                            >
+                            <TableRow>
+                                {this.props.decision.criteria.map((criterion, index) => (
+                                    <TableHeaderColumn key={index}>{criterion.name}</TableHeaderColumn>
+                                ))}
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody displayRowCheckbox={false} >
+                            {this.props.decision.choices.map((choice, index) => (
+                                <TableRow key={index}>
+                                    <TableRowColumn key={index}>{choice.name}</TableRowColumn>
+                                    {this.props.decision.criteria.map((criterion, i) => (
+                                        criterion.name === '-' ? '' :
+                                            <TableRowColumn key={i}>{
+                                                this.state.info.filter(function (info) {
+                                                    return info.row === criterion.name && info.col === choice.name
+                                                })[0] ? this.state.info.filter(function (info) {
+                                                    return info.row === criterion.name && info.col === choice.name
+                                                })[0].description : ''
+                                            }</TableRowColumn>
                                     ))}
                                 </TableRow>
-                            </TableHeader>
-                            <TableBody displayRowCheckbox={false} >
-                                {this.props.decision.choices.map((choice, index) => (
-                                    <TableRow key={index}>
-                                        <TableRowColumn key={index}>{choice.name}</TableRowColumn>
-                                        {this.props.decision.criteria.map((criterion, i) => (
-                                            criterion.name === '-' ? '' :
-                                                <TableRowColumn key={i}>{
-                                                    this.state.info.filter(function (info) {
-                                                        return info.row === criterion.name && info.col === choice.name
-                                                    })[0] ? this.state.info.filter(function (info) {
-                                                        return info.row === criterion.name && info.col === choice.name
-                                                    })[0].description : ''
-                                                }</TableRowColumn>
-                                        ))}
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                        <Dialog
-                            title="Add Information for cell"
-                            actions={actions}
-                            modal={false}
-                            open={this.state.open}
-                            onRequestClose={this.handleCloseModal}
-                            autoScrollBodyContent={true}>
-                            <UpVote
-                                col={this.state.col}
-                                row={this.state.row}
-                                tmpCell={this.state.tmpCell}
-                                //handleInputChange={this.handleInputChange.bind(this)}
-                                />
-                        </Dialog>
-                    </Paper>
-                </div>
-            </MuiThemeProvider>
+                            ))}
+                        </TableBody>
+                    </Table>
+                    <Dialog
+                        title="Add Information for cell"
+                        actions={actions}
+                        modal={false}
+                        open={this.state.open}
+                        onRequestClose={this.handleCloseModal}
+                        autoScrollBodyContent={true}>
+                        <UpVote
+                            col={this.state.col}
+                            row={this.state.row}
+                            tmpCell={this.state.tmpCell}
+                            //handleInputChange={this.handleInputChange.bind(this)}
+                            />
+                    </Dialog>
+                </Paper>
+            </div>
         )
     }
 }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import MenuItem from 'material-ui/MenuItem'
 import MenuIcon from 'material-ui/svg-icons/navigation/menu'
 import IconButton from 'material-ui/IconButton'
@@ -29,7 +28,6 @@ class DecisionAppBarLeftIconMenu extends Component {
 
     render() {
         return (
-            <MuiThemeProvider>
                 <div>
                     <IconButton onTouchTap={this.handleToggle}>
                         <MenuIcon color='white' />
@@ -52,7 +50,6 @@ class DecisionAppBarLeftIconMenu extends Component {
                         <MenuItem primaryText="All" leftIcon={<Accessibility />}  onClick={() => this.handleClickCategory('All')}/>
                     </Drawer>
                 </div>
-            </MuiThemeProvider>
         )
     }
 }

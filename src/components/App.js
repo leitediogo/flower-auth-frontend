@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Router, Route, browserHistory } from 'react-router'
 import { requireAuth } from '../auth'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import EditProfile from './EditProfile'
 import DecisionCardList from './DecisionCardList'
 import TestIcons from './TestIcons'
@@ -15,10 +16,32 @@ import TestProfile from './TestProfile'
 import DecisionEdit from './DecisionEdit'
 import DecisionView from './DecisionView'
 
+
 //Some components use react-tap-event-plugin (https://github.com/zilverline/react-tap-event-plugin) to listen for touch events (onTouchTap) because onClick is not fast enough (http://stackoverflow.com/a/34015469/988941)
 //This dependency is temporary and will eventually go away. Until then, be sure to inject this plugin at the start of your app.
 import injectTapEventPlugin from 'react-tap-event-plugin'
-injectTapEventPlugin();
+injectTapEventPlugin()
+
+const muiTheme = getMuiTheme({
+  //spacing: 30,
+  fontFamily: 'Roboto, sans-serif',
+  palette: {
+    primary1Color: 'gray',
+    //primary2Color: 'green',
+    //primary3Color: 'green',
+    //accent1Color: 'green',
+    //accent2Color: 'green',
+    //accent3Color: 'green',
+    //textColor: 'green',
+    //alternateTextColor: 'green',
+    //canvasColor: 'green',
+    //borderColor: 'green',
+    //disabledColor: fade('green', 0.3),
+    //pickerHeaderColor: 'green',
+    //clockCircleColor: fade('green', 0.07),
+    //shadowColor: 'green',
+  }
+})
 
 const api_server_name = process.env.REACT_APP_API_SERVER_NAME
 const api_server_port = process.env.REACT_APP_API_SERVER_PORT
@@ -59,7 +82,7 @@ class App extends Component {
   }
   render() {
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={muiTheme}>
         <div>
           <DecisionAppBar filterDecisions={this.filterDecisions.bind(this)} />
           <Router history={browserHistory}>

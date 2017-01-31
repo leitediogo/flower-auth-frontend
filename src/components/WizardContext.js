@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import TextField from 'material-ui/TextField'
 import SelectField from 'material-ui/SelectField'
 import Paper from 'material-ui/Paper'
@@ -17,7 +16,6 @@ const styles = {
 class WizardContext extends Component {
     render() {
         return (
-            <MuiThemeProvider>
                 <div>
                     <Paper zDepth={0} style={styles.paper}>
                         <TextField
@@ -55,7 +53,6 @@ class WizardContext extends Component {
                         <br />
                     </Paper>
                 </div>
-            </MuiThemeProvider>
         )
     }
 }

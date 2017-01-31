@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Card, CardActions, CardHeader, CardTitle, CardText, CardMedia } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import { Card, CardActions, CardHeader, CardTitle, CardText, CardMedia } from 'material-ui/Card'
+import FlatButton from 'material-ui/FlatButton'
 
 let style = {
     margin: 20,
@@ -11,7 +10,6 @@ let style = {
 class DecisionCard extends Component {
     render() {
         return (
-            <MuiThemeProvider>
                 <div>
                     <Card zDepth={1} style={style}>
                         <CardHeader 
@@ -35,7 +33,6 @@ class DecisionCard extends Component {
                         </CardActions>
                     </Card>
                 </div>
-            </MuiThemeProvider>
         )
     }
 }

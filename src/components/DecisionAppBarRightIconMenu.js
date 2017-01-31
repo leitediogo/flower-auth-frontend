@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
 import IconButton from 'material-ui/IconButton'
@@ -11,25 +10,21 @@ class DecisionAppBarRightIconMenu extends Component {
     render() {
         const {profile} = this.props
         return (
-            <MuiThemeProvider>
-                <div>
-                    <IconButton tooltip="Notifications">
-                        <NotificationsIcon />
-                    </IconButton>
-                    <IconMenu
-                        iconButtonElement={<IconButton><Avatar src={profile.picture} size={30}/></IconButton>}
-                        anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-                        targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-                        >
-                        <MenuItem primaryText="Settings" href="/profile/edit" />
-                        <MenuItem primaryText="Help" />
-                        <MenuItem primaryText="Sign out" onClick={()=>{logout()}}/>
-                    </IconMenu>
-                   
-                </div>
-            </MuiThemeProvider>
+            <div>
+                <IconButton tooltip="Notifications">
+                    <NotificationsIcon />
+                </IconButton>
+                <IconMenu
+                    iconButtonElement={<IconButton><Avatar src={profile.picture} size={30} /></IconButton>}
+                    anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+                    targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+                    >
+                    <MenuItem primaryText="Settings" href="/profile/edit" />
+                    <MenuItem primaryText="Help" />
+                    <MenuItem primaryText="Sign out" onClick={() => { logout() } } />
+                </IconMenu>
+            </div>
         )
     }
-
 }
 export default connectProfile(DecisionAppBarRightIconMenu)
