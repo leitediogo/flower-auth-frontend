@@ -21,7 +21,7 @@ const styles = {
     }
 }
 
-class TestMatrix extends Component {
+class TestMatrix1 extends Component {
 
     constructor(props, context) {
         super(props, context)
@@ -120,17 +120,14 @@ class TestMatrix extends Component {
                                 enableSelectAll={false}>
                                 <TableRow onCellClick={this.handleInformationHeaderRow}>
                                     {this.state.decision.criteria.map((row, index) => (
-                                        <TableHeaderColumn tooltip="Criteria" key={index}>{row.name}</TableHeaderColumn>
+                                        <TableHeaderColumn key={index}>{row.name}</TableHeaderColumn>
                                     ))}
                                 </TableRow>
                             </TableHeader>
                             <TableBody displayRowCheckbox={false} >
                                 {this.state.decision.choices.map((row, index) => (
                                     <TableRow key={index}>
-                                        <TableHeaderColumn tooltip="Choices" style={{ textAlign: 'center' }}>
-                                           {row.name}
-                                        </TableHeaderColumn>
-                                        <TableRowColumn></TableRowColumn>
+                                        <TableRowColumn>{row.name}</TableRowColumn>
                                         <TableRowColumn></TableRowColumn>
                                         <TableRowColumn></TableRowColumn>
                                         <TableRowColumn></TableRowColumn>
@@ -166,4 +163,4 @@ class TestMatrix extends Component {
     }
 }
 
-export default TestMatrix
+export default TestMatrix1
