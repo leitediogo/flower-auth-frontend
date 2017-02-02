@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group' // ES6
 import './UpVote.css'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Card, CardHeader } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
-import avatar from '../images/avatar.jpg'
 import TextField from 'material-ui/TextField'
 import ThumbUp from 'material-ui/svg-icons/action/thumb-up'
 import ThumbDown from 'material-ui/svg-icons/action/thumb-down'
 import Delete from 'material-ui/svg-icons/action/delete'
+import { connectProfile } from '../auth'
 
 let styles = {
     cardStyle: {
@@ -42,19 +41,18 @@ class UpVote extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            listOfInfo: [
-                { title: 'falcon', description: 'millenium falcon', votes: 0 },
-                { title: 'xwing', description: 'rebel fighter', votes: 0 },
-                { title: 'tie', description: 'imperial fighter', votes: 0 },
-            ],
+            listOfInfo: [],
             title: '',
-            description: ''
+            description: '',
+            blockThumbUp: false,
+            blockThumbDown: false
         }
         this.handleAdd = this.handleAdd.bind(this)
     }
 
     handleAdd() {
-        const newListOfInfo = this.state.listOfInfo.concat({ title: this.state.title, description: this.state.description, votes: 0 });
+        const {profile} = this.props
+        const newListOfInfo = this.state.listOfInfo.concat({ title: this.state.title, description: this.state.description, avatar: profile.picture , votes: 1 });
         console.log(newListOfInfo)
         this.setState({ listOfInfo: newListOfInfo, title: '', description: '' })
     }
@@ -78,6 +76,8 @@ class UpVote extends Component {
         console.log(i)
         let change = this.state
         change.listOfInfo[i].votes += 1
+        change.blockThumbUp = true
+        change.blockThumbDown = false
         this.setState(change)
     }
 
@@ -86,6 +86,8 @@ class UpVote extends Component {
         console.log(i)
         let change = this.state
         change.listOfInfo[i].votes -= 1
+        change.blockThumbUp = false
+        change.blockThumbDown = true
         this.setState(change)
     }
 
@@ -99,13 +101,13 @@ class UpVote extends Component {
                             <CardHeader
                                 title={info.title}
                                 subtitle={info.description}
-                                avatar={avatar}>
+                                avatar={info.avatar}>
                             </CardHeader>
                         </div>
                         <div style={styles.divStyleRight}>
                         <b>{info.votes}&nbsp;</b>
-                            <ThumbUp style={styles.iconStyle} onClick={() => this.handleThumbUp(i)} />
-                            <ThumbDown style={styles.iconStyle} onClick={() => this.handleThumbDown(i)} />
+                            <ThumbUp style={styles.iconStyle} onClick={ this.state.blockThumbUp ? () => console.log('noUP') :  () => this.handleThumbUp(i)} />
+                            <ThumbDown style={styles.iconStyle} onClick={this.state.blockThumbDown ? () => console.log('noDOWN') :  () => this.handleThumbDown(i)} />
                             <div>
                                 <center>
                                     <Delete style={styles.iconStyle} onClick={() => this.handleRemove(i)} />
@@ -121,7 +123,6 @@ class UpVote extends Component {
     render() {
 
         return (
-            <MuiThemeProvider>
                 <div style={styles.divStyleCenter}>
                     <br />
                     <TextField
@@ -155,9 +156,8 @@ class UpVote extends Component {
                     <hr />
                     col : {this.props.col}  row : {this.props.row}
                 </div>
-            </MuiThemeProvider>
         )
     }
 }
 
-export default UpVote
+export default connectProfile(UpVote)

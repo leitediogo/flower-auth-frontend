@@ -28,7 +28,7 @@ class DecisionAppBar extends Component {
         return (
                 <div>
                     <AppBar
-                        title={<span style={styles.title}>Flower</span>}
+                        title={<span style={styles.title}>RPA</span>}
                         style={styles.bar}
                         onTitleTouchTap={this.handleAppBarClick}
                         iconElementRight={(profile) ? <DecisionAppBarRightIconMenu /> : <FlatButton label="Login" onClick={()=>{login()}}/>}

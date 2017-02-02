@@ -1,7 +1,6 @@
 import React from 'react'
 import { Component } from 'react'
 import DecisionCard from './DecisionCard'
-import avatar from '../images/avatar.jpg'
 import DecisionAddFloatingButton from './DecisionAddFloatingButton'
 import { connectProfile } from '../auth'
 
@@ -15,7 +14,7 @@ class DecisionCardList extends Component {
         const {profile} = this.props
         let cards = [];
         for (var i = 0; i < this.props.decisions.length; i++) {
-            cards.push(<DecisionCard decision={this.props.decisions[i]} avatar={avatar} key={i} />)
+            cards.push(<DecisionCard decision={this.props.decisions[i]} key={i} />)
         }
         return (
             <div>
