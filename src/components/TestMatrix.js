@@ -26,15 +26,15 @@ class TestMatrix extends Component {
                 ]
             },
             info: [
-                { row: '1', col: '2', name: 'choice1-crit1', description: 'teste' },
-                { row: '1', col: '3', name: 'choice1-crit2', description: 'teste' },
-                { row: '1', col: '4', name: 'choice1-crit3', description: 'teste' },
-                { row: '2', col: '2', name: 'choice2-crit1', description: 'teste' },
-                { row: '2', col: '3', name: 'choice2-crit2', description: 'teste' },
-                { row: '2', col: '4', name: 'choice2-crit3', description: 'teste' },
-                { row: '3', col: '2', name: 'choice3-crit1', description: 'teste' },
-                { row: '3', col: '3', name: 'choice3-crit2', description: 'teste' },
-                { row: '3', col: '4', name: 'choice3-crit3', description: 'teste' },
+                { id: '1:1', name: 'choice1-crit1', description: 'teste1' },
+                { id: '1:2', name: 'choice1-crit2', description: 'teste2' },
+                { id: '1:3', name: 'choice1-crit3', description: 'teste3' },
+                { id: '2:1', name: 'choice2-crit1', description: 'teste4' },
+                { id: '2:2', name: 'choice2-crit2', description: 'teste5' },
+                { id: '2:3', name: 'choice2-crit3', description: 'teste6' },
+                { id: '3:1', name: 'choice3-crit1', description: 'teste7' },
+                { id: '3:2', name: 'choice3-crit2', description: 'teste8' },
+                { id: '3:3', name: 'choice3-crit3', description: 'teste9' },
             ]
         }
     }
@@ -76,7 +76,7 @@ class TestMatrix extends Component {
                                 <TableRow key={index}>
                                     <TableRowColumn key={index}>{choice.name}</TableRowColumn>
                                     {this.state.decision.criteria.map((criterion, index) => (
-                                        <TableRowColumn key={index}>-</TableRowColumn>
+                                        <TableRowColumn key={index}>{this.state.info.filter(info => info.id === choice.id + ':' + criterion.id)[0].name}</TableRowColumn>
                                     ))}
                                 </TableRow>
                             ))}
@@ -84,7 +84,7 @@ class TestMatrix extends Component {
                     </Table>
                 </div>
             </MuiThemeProvider>
-        );
+        )
     }
 }
 
