@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Table, TableRow, TableBody, TableRowColumn } from 'material-ui/Table'
-
+import Dialog from 'material-ui/Dialog'
+import UpVote from './UpVote'
+import FlatButton from 'material-ui/FlatButton'
 
 class TestMatrix extends Component {
 
@@ -12,60 +14,85 @@ class TestMatrix extends Component {
             row: 0,
             col: 0,
             tmpCell: '',
+            infoValue: '',
             decision: {
                 criteria: [
-                    //{ id: 0, name: '-' },
-                    { id: 1, name: 'criteria1' },
-                    { id: 2, name: 'criteria2' },
-                    { id: 3, name: 'criteria3' }
+                    { id: 2, name: 'criteria1' },//Starts at 2 for cell handling
+                    { id: 3, name: 'criteria2' },
+                    { id: 4, name: 'criteria3' }
                 ],
                 choices: [
-                    { id: 1, name: 'choice1' },
-                    { id: 2, name: 'choice2' },
-                    { id: 3, name: 'choice3' }
+                    { id: 2, name: 'choice1' },
+                    { id: 3, name: 'choice2' },
+                    { id: 4, name: 'choice3' }
                 ]
             },
             info: [
-                { id: '1:1', name: 'choice1-crit1', description: 'teste1' },
-                { id: '1:2', name: 'choice1-crit2', description: 'teste2' },
-                { id: '1:3', name: 'choice1-crit3', description: 'teste3' },
-                { id: '2:1', name: 'choice2-crit1', description: 'teste4' },
-                { id: '2:2', name: 'choice2-crit2', description: 'teste5' },
-                { id: '2:3', name: 'choice2-crit3', description: 'teste6' },
-                { id: '3:1', name: 'choice3-crit1', description: 'teste7' },
-                { id: '3:2', name: 'choice3-crit2', description: 'teste8' },
-                { id: '3:3', name: 'choice3-crit3', description: 'teste9' },
+                { id: '2:2', name: 'choice1-crit1', description: 'teste1' },
+                { id: '2:3', name: 'choice1-crit2', description: 'teste2' },
+                { id: '2:4', name: 'choice1-crit3', description: 'teste3' },
+                { id: '3:2', name: 'choice2-crit1', description: 'teste4' },
+                { id: '3:3', name: 'choice2-crit2', description: 'teste5' },
+                { id: '3:4', name: 'choice2-crit3', description: 'teste6' },
+                { id: '4:2', name: 'choice3-crit1', description: 'teste7' },
+                { id: '4:3', name: 'choice3-crit2', description: 'teste8' },
+                { id: '4:4', name: 'choice3-crit3', description: 'teste9' },
             ]
         }
+        this.handleSaveInfoValue = this.handleSaveInfoValue.bind(this)
     }
 
-    handleInputChange = (e) => {
+    handleSaveInfoValue = (row, column, value) => {
+        console.log('handleSaveInfoValue')
+        console.log(row + ':' + column + ':::' + value)
         let change = this.state
-        change[e.target.id] = e.target.value
+        change.info.filter(info => info.id === row + ':' + column)[0].name = value
         this.setState(change)
         console.log(this.state)
     }
 
     handleInformationRow = (rowNumber, columnId) => {
+        console.log('handleInformationRow')
         console.log('clicked row: ', rowNumber, ' column: ', columnId)
-        this.setState({ row: rowNumber, col: columnId })
+        this.setState({ open: true, row: rowNumber, col: columnId })
     }
 
-    handleInformationHeaderRow = (rowNumber, columnId) => {
-        console.log('clicked row: ', rowNumber, ' column: ', columnId)
+    handleSaveInformationModal = () => {
+        console.log('handleSaveInformationModal')
+        console.log(this.state.tmpCell)
+        //set state to close modal
+        this.setState({ open: false })
+    }
+
+    handleOpenModal() {
+        this.setState({ open: true })
+    }
+
+    handleCloseModal = () => {
+        this.setState({ open: false })
     }
 
     render() {
+        const actions = [
+            <FlatButton
+                label="Cancel"
+                primary={true}
+                onTouchTap={this.handleCloseModal}
+            />,
+            <FlatButton
+                label="Save"
+                primary={true}
+                keyboardFocused={true}
+                onTouchTap={this.handleSaveInformationModal}
+            />,
+        ]
         return (
             <MuiThemeProvider>
                 <div>
                     <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
                     <Table onCellClick={this.handleInformationRow} >
                         <TableBody displayRowCheckbox={false} >
+                            <TableRow />
                             <TableRow>
                                 <TableRowColumn> - </TableRowColumn>
                                 {this.state.decision.criteria.map((criterion, index) => (
@@ -82,6 +109,20 @@ class TestMatrix extends Component {
                             ))}
                         </TableBody>
                     </Table>
+                    <Dialog
+                        title="Add Information for cell"
+                        actions={actions}
+                        modal={false}
+                        open={this.state.open}
+                        onRequestClose={this.handleCloseModal}
+                        autoScrollBodyContent={true}>
+                        <UpVote
+                            col={this.state.col}
+                            row={this.state.row}
+                            tmpCell={this.state.tmpCell}
+                            handleSaveInfoValue={this.handleSaveInfoValue}
+                        />
+                    </Dialog>
                 </div>
             </MuiThemeProvider>
         )

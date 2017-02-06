@@ -44,17 +44,25 @@ class UpVote extends Component {
             listOfInfo: [],
             title: '',
             description: '',
-            blockThumbUp: false,
-            blockThumbDown: false
+            infoValue: ''
         }
         this.handleAdd = this.handleAdd.bind(this)
     }
 
     handleAdd() {
+        this.handleInfoValue()
         const {profile} = this.props
-        const newListOfInfo = this.state.listOfInfo.concat({ title: this.state.title, description: this.state.description, avatar: profile.picture , votes: 1 });
+        const newListOfInfo = this.state.listOfInfo.concat({
+            title: this.state.title,
+            description: this.state.description,
+            avatar: profile.picture,
+            votes: 0,
+            blockThumbUp: false,
+            blockThumbDown: true
+        });
         console.log(newListOfInfo)
         this.setState({ listOfInfo: newListOfInfo, title: '', description: '' })
+
     }
 
     handleRemove(i) {
@@ -76,8 +84,8 @@ class UpVote extends Component {
         console.log(i)
         let change = this.state
         change.listOfInfo[i].votes += 1
-        change.blockThumbUp = true
-        change.blockThumbDown = false
+        change.listOfInfo[i].blockThumbUp = true
+        change.listOfInfo[i].blockThumbDown = false
         this.setState(change)
     }
 
@@ -86,14 +94,21 @@ class UpVote extends Component {
         console.log(i)
         let change = this.state
         change.listOfInfo[i].votes -= 1
-        change.blockThumbUp = false
-        change.blockThumbDown = true
+        change.listOfInfo[i].blockThumbUp = false
+        change.listOfInfo[i].blockThumbDown = true
         this.setState(change)
+    }
+
+    handleInfoValue = () => {
+        console.log('handleInfoValue')
+        let change = this.state
+        change.infoValue = 'mostVotes'//Calculate infovalue based on most voted
+        this.setState(change)
+        this.props.handleSaveInfoValue(this.props.row,this.props.col,change.infoValue)//:))))))) done it
     }
 
     createlistOfInfo = () => {
         return (
-            //onClick={() => this.handleRemove(i)}
             this.state.listOfInfo.map((info, i) => (
                 <div key={i}>
                     <Card zDepth={3} style={styles.cardStyle} >
@@ -105,9 +120,9 @@ class UpVote extends Component {
                             </CardHeader>
                         </div>
                         <div style={styles.divStyleRight}>
-                        <b>{info.votes}&nbsp;</b>
-                            <ThumbUp style={styles.iconStyle} onClick={ this.state.blockThumbUp ? () => console.log('noUP') :  () => this.handleThumbUp(i)} />
-                            <ThumbDown style={styles.iconStyle} onClick={this.state.blockThumbDown ? () => console.log('noDOWN') :  () => this.handleThumbDown(i)} />
+                            <b>{info.votes}&nbsp;</b>
+                            <ThumbUp style={styles.iconStyle} onClick={info.blockThumbUp ? () => console.log('noUP') : () => this.handleThumbUp(i)} />
+                            <ThumbDown style={styles.iconStyle} onClick={info.blockThumbDown ? () => console.log('noDOWN') : () => this.handleThumbDown(i)} />
                             <div>
                                 <center>
                                     <Delete style={styles.iconStyle} onClick={() => this.handleRemove(i)} />
@@ -121,41 +136,42 @@ class UpVote extends Component {
     }
 
     render() {
-
         return (
-                <div style={styles.divStyleCenter}>
-                    <br />
-                    <TextField
-                        id="title"
-                        hintText="Insert information"
-                        floatingLabelText="Information"
-                        value={this.state.title}
-                        onChange={this.handleInputChange}
-                        />
-                    <br />
-                    <TextField
-                        id="description"
-                        hintText="Insert Description"
-                        floatingLabelText="Description"
-                        value={this.state.description}
-                        onChange={this.handleInputChange}
-                        />
-                    <br />
-                    <FlatButton
-                        onClick={this.handleAdd}
-                        label="Add" />
-                    <ReactCSSTransitionGroup
-                        transitionName="example"
-                        transitionEnterTimeout={1000}
-                        transitionLeaveTimeout={1000}
-                        transitionAppear={true}
-                        transitionAppearTimeout={1000}
-                        >
-                        {this.createlistOfInfo()}
-                    </ReactCSSTransitionGroup>
-                    <hr />
-                    col : {this.props.col}  row : {this.props.row}
-                </div>
+            <div style={styles.divStyleCenter}>
+                <br />
+                <TextField
+                    id="title"
+                    hintText="Insert information"
+                    floatingLabelText="Information"
+                    value={this.state.title}
+                    onChange={this.handleInputChange}
+                />
+                <br />
+                <TextField
+                    id="description"
+                    hintText="Insert Description"
+                    floatingLabelText="Description"
+                    value={this.state.description}
+                    onChange={this.handleInputChange}
+                />
+                <br />
+                <FlatButton
+                    onClick={this.handleAdd}
+                    label="Add" />
+                <ReactCSSTransitionGroup
+                    transitionName="example"
+                    transitionEnterTimeout={1000}
+                    transitionLeaveTimeout={1000}
+                    transitionAppear={true}
+                    transitionAppearTimeout={1000}
+                >
+                    {this.createlistOfInfo()}
+                </ReactCSSTransitionGroup>
+                <hr />
+                col : {this.props.col}  row : {this.props.row}
+                <br />
+                Info Value: {this.state.infoValue}
+            </div>
         )
     }
 }
