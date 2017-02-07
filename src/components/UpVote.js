@@ -40,8 +40,34 @@ let styles = {
 class UpVote extends Component {
     constructor(props) {
         super(props)
+        const {profile} = this.props
         this.state = {
-            listOfInfo: [],
+            listOfInfo: [
+                {
+                    title: 'test1 for sorting',
+                    description: 'test description',
+                    avatar: profile.picture,
+                    votes: 4,
+                    blockThumbUp: false,
+                    blockThumbDown: true
+                },
+                                {
+                    title: 'test2 for sorting',
+                    description: 'test description',
+                    avatar: profile.picture,
+                    votes: 1,
+                    blockThumbUp: false,
+                    blockThumbDown: true
+                },
+                                {
+                    title: 'test3 for sorting',
+                    description: 'test description',
+                    avatar: profile.picture,
+                    votes: 3,
+                    blockThumbUp: false,
+                    blockThumbDown: true
+                }
+            ],
             title: '',
             description: '',
             infoValue: ''
@@ -51,6 +77,7 @@ class UpVote extends Component {
 
     handleAdd() {
         this.handleInfoValue()
+        this.sortListOfInfo()
         const {profile} = this.props
         const newListOfInfo = this.state.listOfInfo.concat({
             title: this.state.title,
@@ -104,7 +131,14 @@ class UpVote extends Component {
         let change = this.state
         change.infoValue = 'mostVotes'//Calculate infovalue based on most voted
         this.setState(change)
-        this.props.handleSaveInfoValue(this.props.row,this.props.col,change.infoValue)//:))))))) done it
+        //this.props.handleSaveInfoValue(this.props.row, this.props.col, change.infoValue)//:))))))) done it
+    }
+
+    sortListOfInfo = () => {
+        console.log('sortListOfInfo')
+        this.state.listOfInfo.sort(function(a,b){
+            return parseFloat(a.votes) - parseFloat(b.votes)
+        })
     }
 
     createlistOfInfo = () => {
