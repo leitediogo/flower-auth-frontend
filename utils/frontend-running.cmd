@@ -1,7 +1,8 @@
 @echo off
-echo Batch script for running Frontend
-cd /d C:\Projects\flower-auth-frontend
+echo Batch script for updating and running Frontend
 echo on
-git pull
-call npm install
+cd..
+FOR /F "tokens=* USEBACKQ" %%F IN (`git pull`) DO (SET a=%%F)
+set "b=Already up-to-date."
+if not "%a%"=="%b%" call npm install
 call npm start
