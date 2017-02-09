@@ -61,9 +61,34 @@ let state = {
         { id: '3:1', name: 'choice3-crit1', description: 'teste7' },
         { id: '3:2', name: 'choice3-crit2', description: 'teste8' },
         { id: '3:3', name: 'choice3-crit3', description: 'teste9' },
+    ],
+    listOfInfo: [
+        {
+            title: 'test1 for sorting',
+            description: 'test description',
+            avatar: '',
+            votes: 4,
+            blockThumbUp: false,
+            blockThumbDown: true
+        },
+        {
+            title: 'test2 for sorting',
+            description: 'test description',
+            avatar: '',
+            votes: 2,
+            blockThumbUp: false,
+            blockThumbDown: true
+        },
+        {
+            title: 'test3 for sorting',
+            description: 'test description',
+            avatar: '',
+            votes: 5,
+            blockThumbUp: false,
+            blockThumbDown: true
+        }
     ]
 }
-
 
 
 //filter
@@ -99,9 +124,28 @@ let maxOrder = Math.max.apply(null, orderArray)
 //console.log (analystsFilterA)
 //console.log (analystsMapA)
 //console.log (stepReduce)
-
 //console.log(state)
 
-let i = state.info.filter( info => info.id === '2:1')[0].name
-console.log (i)
+//Find info cell in table
+let i = state.info.filter(info => info.id === '2:1')[0].name
+//console.log(i)
+
+//Sort list per votes descending
+/*
+let result = state.listOfInfo.sort(function(a,b){
+            return parseFloat(b.votes) - parseFloat(a.votes)
+        })
+console.log(result)
+*/
+
+//Sort list per votes descending generalized function
+function sortListOfObjects(list, attr){
+    list.sort(function(a, b){
+        return parseFloat(b[attr]) - parseFloat (a[attr])
+    })
+}
+
+sortListOfObjects(state.listOfInfo, 'votes')
+console.log(state.listOfInfo)
+
 
