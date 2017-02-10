@@ -1,4 +1,7 @@
 "use strict"
+
+import u from './utils'
+
 let state = {
     finished: false,
     stepIndex: 0,
@@ -139,13 +142,15 @@ console.log(result)
 */
 
 //Sort list per votes descending generalized function
+/*
 function sortListOfObjects(list, attr){
     list.sort(function(a, b){
         return parseFloat(b[attr]) - parseFloat (a[attr])
     })
 }
+*/
 
-sortListOfObjects(state.listOfInfo, 'votes')
-console.log(state.listOfInfo)
+//utils.sortListOfObjects(state.listOfInfo, 'votes')
+//console.log(state.listOfInfo)
 
 
