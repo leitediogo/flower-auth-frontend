@@ -13,7 +13,6 @@ class TestMatrix extends Component {
             open: false,
             row: 0,
             col: 0,
-            tmpCell: '',
             infoValue: '',
             decision: {
                 criteria: [
@@ -57,9 +56,21 @@ class TestMatrix extends Component {
         this.setState({ open: true, row: rowNumber, col: columnId })
     }
 
+    handleInfoValue = (value) => {
+        console.log('handleInfoValue')
+        let change = this.state
+        change.infoValue = value
+        this.setState(change)
+        console.log(this.state)
+    }
+
+    //TODO:: here i were i save the cell
     handleSaveInformationModal = () => {
         console.log('handleSaveInformationModal')
-        console.log(this.state.tmpCell)
+        console.log('row ', this.state.row)
+        console.log('column ', this.state.col)
+        console.log('infoValue ', this.state.infoValue)
+        this.handleSaveInfoValue(this.state.row, this.state.col, this.state.infoValue)
         //set state to close modal
         this.setState({ open: false })
     }
@@ -119,8 +130,8 @@ class TestMatrix extends Component {
                         <UpVote
                             col={this.state.col}
                             row={this.state.row}
-                            tmpCell={this.state.tmpCell}
                             handleSaveInfoValue={this.handleSaveInfoValue}
+                            handleInfoValue={this.handleInfoValue}
                         />
                     </Dialog>
                 </div>

@@ -1,6 +1,7 @@
 "use strict"
 
-import u from './utils'
+var u = require ('./utils')
+//import u from './utils'
 
 let state = {
     finished: false,

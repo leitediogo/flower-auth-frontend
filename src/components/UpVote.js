@@ -47,7 +47,7 @@ class UpVote extends Component {
                     title: 'test1 for sorting',
                     description: 'test description',
                     avatar: profile.picture,
-                    votes: 4,
+                    votes: 1,
                     blockThumbUp: false,
                     blockThumbDown: true
                 },
@@ -55,7 +55,7 @@ class UpVote extends Component {
                     title: 'test2 for sorting',
                     description: 'test description',
                     avatar: profile.picture,
-                    votes: 1,
+                    votes: 2,
                     blockThumbUp: false,
                     blockThumbDown: true
                 },
@@ -77,7 +77,6 @@ class UpVote extends Component {
 
     handleAdd() {
         this.handleInfoValue()
-        this.sortListOfInfo()
         const {profile} = this.props
         const newListOfInfo = this.state.listOfInfo.concat({
             title: this.state.title,
@@ -114,6 +113,8 @@ class UpVote extends Component {
         change.listOfInfo[i].blockThumbUp = true
         change.listOfInfo[i].blockThumbDown = false
         this.setState(change)
+        //Sort list
+        this.sortListOfObjects (this.state.listOfInfo, 'votes')
     }
 
     handleThumbDown = (i) => {
@@ -124,20 +125,24 @@ class UpVote extends Component {
         change.listOfInfo[i].blockThumbUp = false
         change.listOfInfo[i].blockThumbDown = true
         this.setState(change)
+        //sort list
+        this.sortListOfObjects (this.state.listOfInfo, 'votes')
     }
 
     handleInfoValue = () => {
         console.log('handleInfoValue')
         let change = this.state
-        change.infoValue = 'mostVotes'//Calculate infovalue based on most voted
+        //Calculate infoValue based on most voted
+        console.log(this.state.listOfInfo[0])
+        change.infoValue = this.state.listOfInfo[0].title
         this.setState(change)
-        //this.props.handleSaveInfoValue(this.props.row, this.props.col, change.infoValue)//:))))))) done it
+        this.props.handleSaveInfoValue(this.props.row, this.props.col, change.infoValue)//:))))))) done it
     }
 
-    sortListOfInfo = () => {
-        console.log('sortListOfInfo')
-        this.state.listOfInfo.sort(function(a,b){
-            return parseFloat(a.votes) - parseFloat(b.votes)
+    //TODO::place this in separate utils file
+    sortListOfObjects = (list, attr) => {
+        list.sort(function (a, b) {
+            return parseFloat(b[attr]) - parseFloat(a[attr])
         })
     }
 
