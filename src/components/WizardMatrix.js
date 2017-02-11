@@ -1,18 +1,8 @@
 import React, { Component } from 'react'
-import Paper from 'material-ui/Paper'
 import FlatButton from 'material-ui/FlatButton'
-import { Table, TableRow, TableBody, TableRowColumn, TableHeader, TableHeaderColumn } from 'material-ui/Table'
+import { Table, TableRow, TableBody, TableRowColumn } from 'material-ui/Table'
 import Dialog from 'material-ui/Dialog'
 import UpVote from './UpVote'
-
-const styles = {
-    paper: {
-        margin: 20,
-        textAlign: 'left',
-        width: 500,
-        height: 300
-    }
-}
 
 class WizardMatrix extends Component {
 
@@ -22,9 +12,28 @@ class WizardMatrix extends Component {
             open: false,
             row: 0,
             col: 0,
-            tmpCell: '',
+            infoValue: '',
             info: []
         }
+        this.handleSaveInfoValue = this.handleSaveInfoValue.bind(this)
+    }
+
+    componentWillMount() {
+        console.log('componentWillMount')
+        console.log(this.props.decision)
+        let change = this.state
+        change.info = [{ id: '2:2', name: 'choice1-crit1', description: 'teste1' }]
+        this.setState(change)
+        console.log(this.state)
+    }
+
+    handleSaveInfoValue = (row, column, value) => {
+        console.log('handleSaveInfoValue')
+        console.log(row + ':' + column + ':::' + value)
+        let change = this.state
+        change.info.filter(info => info.id === row + ':' + column)[0].name = value
+        this.setState(change)
+        console.log(this.state)
     }
 
     handleInputChange = (e) => {
@@ -35,13 +44,25 @@ class WizardMatrix extends Component {
     }
 
     handleInformationRow = (rowNumber, columnId) => {
+        console.log('handleInformationRow')
         console.log('clicked row: ', rowNumber, ' column: ', columnId)
         this.setState({ open: true, row: rowNumber, col: columnId })
     }
 
+    handleInfoValue = (value) => {
+        console.log('handleInfoValue')
+        let change = this.state
+        change.infoValue = value
+        this.setState(change)
+        console.log(this.state)
+    }
+
     handleSaveInformationModal = () => {
         console.log('handleSaveInformationModal')
-        console.log(this.state.tmpCell)
+        console.log('row ', this.state.row)
+        console.log('column ', this.state.col)
+        console.log('infoValue ', this.state.infoValue)
+        this.handleSaveInfoValue(this.state.row, this.state.col, this.state.infoValue)
         //set state to close modal
         this.setState({ open: false })
     }
@@ -60,62 +81,47 @@ class WizardMatrix extends Component {
                 label="Cancel"
                 primary={true}
                 onTouchTap={this.handleCloseModal}
-                />,
+            />,
             <FlatButton
                 label="Save"
                 primary={true}
                 keyboardFocused={true}
                 onTouchTap={this.handleSaveInformationModal}
-                />,
+            />,
         ]
         return (
             <div>
-                <Paper zDepth={1} style={styles.paper}>
-                    <Table onCellClick={this.handleInformationRow} fixedHeader={true}>
-                        <TableHeader
-                            displaySelectAll={false}
-                            adjustForCheckbox={false}
-                            enableSelectAll={false}
-                            >
-                            <TableRow>
-                                {this.props.decision.criteria.map((criterion, index) => (
-                                    <TableHeaderColumn key={index}>{criterion.name}</TableHeaderColumn>
-                                ))}
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody displayRowCheckbox={false} >
-                            {this.props.decision.choices.map((choice, index) => (
-                                <TableRow key={index}>
-                                    <TableRowColumn key={index}>{choice.name}</TableRowColumn>
-                                    {this.props.decision.criteria.map((criterion, i) => (
-                                        criterion.name === '-' ? '' :
-                                            <TableRowColumn key={i}>{
-                                                this.state.info.filter(function (info) {
-                                                    return info.row === criterion.name && info.col === choice.name
-                                                })[0] ? this.state.info.filter(function (info) {
-                                                    return info.row === criterion.name && info.col === choice.name
-                                                })[0].description : ''
-                                            }</TableRowColumn>
-                                    ))}
-                                </TableRow>
+                <br />
+                <Table onCellClick={this.handleInformationRow} >
+                    <TableBody displayRowCheckbox={false} >
+                        <TableRow />
+                        <TableRow>
+                            <TableRowColumn> - </TableRowColumn>
+                            {this.props.decision.criteria.map((criterion, index) => (
+                                <TableRowColumn key={index}>{criterion.name}</TableRowColumn>
                             ))}
-                        </TableBody>
-                    </Table>
-                    <Dialog
-                        title="Add Information for cell"
-                        actions={actions}
-                        modal={false}
-                        open={this.state.open}
-                        onRequestClose={this.handleCloseModal}
-                        autoScrollBodyContent={true}>
-                        <UpVote
-                            col={this.state.col}
-                            row={this.state.row}
-                            tmpCell={this.state.tmpCell}
-                            //handleInputChange={this.handleInputChange.bind(this)}
-                            />
-                    </Dialog>
-                </Paper>
+                        </TableRow>
+                        {this.props.decision.choices.map((choice, index) => (
+                            <TableRow key={index}>
+                                <TableRowColumn key={index}>{choice.name}</TableRowColumn>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+                <Dialog
+                    title="Add Information for cell"
+                    actions={actions}
+                    modal={false}
+                    open={this.state.open}
+                    onRequestClose={this.handleCloseModal}
+                    autoScrollBodyContent={true}>
+                    <UpVote
+                        col={this.state.col}
+                        row={this.state.row}
+                        handleSaveInfoValue={this.handleSaveInfoValue}
+                        handleInfoValue={this.handleInfoValue}
+                    />
+                </Dialog>
             </div>
         )
     }

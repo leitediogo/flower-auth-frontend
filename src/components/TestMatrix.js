@@ -16,14 +16,14 @@ class TestMatrix extends Component {
             infoValue: '',
             decision: {
                 criteria: [
-                    { id: 2, name: 'criteria1' },//Starts at 2 for cell handling
-                    { id: 3, name: 'criteria2' },
-                    { id: 4, name: 'criteria3' }
+                    { id: 2, name: 'criteria1', description: 'desc Crit1' },//Starts at 2 for cell handling
+                    { id: 3, name: 'criteria2', description: 'desc Crit2' },
+                    { id: 4, name: 'criteria3',  description: 'desc Crit3' }
                 ],
                 choices: [
-                    { id: 2, name: 'choice1' },
-                    { id: 3, name: 'choice2' },
-                    { id: 4, name: 'choice3' }
+                    { id: 2, name: 'choice1', description: 'desc Choice1'},
+                    { id: 3, name: 'choice2',  description: 'desc Choice2' },
+                    { id: 4, name: 'choice3',  description: 'desc Choice3' }
                 ]
             },
             info: [
@@ -64,7 +64,7 @@ class TestMatrix extends Component {
         console.log(this.state)
     }
 
-    //TODO:: here i were i save the cell
+    //TODO:: here is were i save the cell
     handleSaveInformationModal = () => {
         console.log('handleSaveInformationModal')
         console.log('row ', this.state.row)

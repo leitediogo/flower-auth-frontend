@@ -35,7 +35,7 @@ class Wizard extends Component {
                 owner: profile.name,
                 ownerAvatar: profile.picture,
                 participants: [],
-                criteria: [{ name: '-', description: '' }],
+                criteria: [],
                 choices: [],
                 info: []
             }
@@ -78,21 +78,23 @@ class Wizard extends Component {
         }
     }
 
-    handleSaveCriteria(name, desc) {
+    handleSaveCriteria(name, desc, id) {
         let change = this.state
         let criterionToPush = {
             description: desc,
-            name: name
+            name: name,
+            id: id
         }
         change.decision.criteria.push(criterionToPush)
         this.setState(change)
     }
 
-    handleSaveChoice(name, desc) {
+    handleSaveChoice(name, desc, id) {
         let change = this.state
         let choiceToPush = {
             description: desc,
-            name: name
+            name: name,
+            id: id
         }
         change.decision.choices.push(choiceToPush)
         this.setState(change)
@@ -150,44 +152,44 @@ class Wizard extends Component {
     render() {
         const {stepIndex} = this.state
         return (
-                <div style={{ width: '100%', maxWidth: 700, margin: 'auto' }}>
-                    <br /><br /><br />
-                    <Stepper activeStep={stepIndex}>
-                        <Step>
-                            <StepLabel>Decision</StepLabel>
-                        </Step>
-                        <Step>
-                            <StepLabel>Criteria</StepLabel>
-                        </Step>
-                        <Step>
-                            <StepLabel>Choices</StepLabel>
-                        </Step>
-                        <Step>
-                            <StepLabel>Participation</StepLabel>
-                        </Step>
-                        <Step>
-                            <StepLabel>Information Matrix</StepLabel>
-                        </Step>
-                    </Stepper>
+            <div style={{ width: '100%', maxWidth: 700, margin: 'auto' }}>
+                <br /><br /><br />
+                <Stepper activeStep={stepIndex}>
+                    <Step>
+                        <StepLabel>Decision</StepLabel>
+                    </Step>
+                    <Step>
+                        <StepLabel>Criteria</StepLabel>
+                    </Step>
+                    <Step>
+                        <StepLabel>Choices</StepLabel>
+                    </Step>
+                    <Step>
+                        <StepLabel>Participation</StepLabel>
+                    </Step>
+                    <Step>
+                        <StepLabel>Information Matrix</StepLabel>
+                    </Step>
+                </Stepper>
+                <div>
                     <div>
-                        <div>
-                            {this.getStepContent(stepIndex)}
-                            <div style={{ marginTop: 12 }}>
-                                <FlatButton
-                                    label="Back"
-                                    disabled={stepIndex === 0}
-                                    onTouchTap={this.handlePrevWizard}
-                                    style={{ marginRight: 12 }}
-                                    />
-                                <RaisedButton
-                                    label={stepIndex === 4 ? 'Finish' : 'Next'}
-                                    primary={true}
-                                    onTouchTap={stepIndex === 4 ? this.handleFinishWizard : this.handleNextWizard}
-                                    />
-                            </div>
+                        {this.getStepContent(stepIndex)}
+                        <div style={{ marginTop: 12 }}>
+                            <FlatButton
+                                label="Back"
+                                disabled={stepIndex === 0}
+                                onTouchTap={this.handlePrevWizard}
+                                style={{ marginRight: 12 }}
+                            />
+                            <RaisedButton
+                                label={stepIndex === 4 ? 'Finish' : 'Next'}
+                                primary={true}
+                                onTouchTap={stepIndex === 4 ? this.handleFinishWizard : this.handleNextWizard}
+                            />
                         </div>
                     </div>
                 </div>
+            </div>
         )
     }
 }

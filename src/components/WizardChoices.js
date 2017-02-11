@@ -25,7 +25,8 @@ class WizardChoices extends Component {
         this.state = {
             open: false,
             tmpChoiceName: '',
-            tmpChoiceDesc: ''
+            tmpChoiceDesc: '',
+            tmpChoiceId: '1'
         }
     }
 
@@ -47,7 +48,7 @@ class WizardChoices extends Component {
     handleSendSaveChoice = () => {
         console.log('handleSendSaveChoice')
         //update global state
-        this.props.handleSaveChoice(this.state.tmpChoiceName, this.state.tmpChoiceDesc)
+        this.props.handleSaveChoice(this.state.tmpChoiceName, this.state.tmpChoiceDesc, this.state.tmpChoiceId)
         //close modal
         this.setState({ open: false })
         //reset tmps 

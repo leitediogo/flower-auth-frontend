@@ -40,43 +40,16 @@ let styles = {
 class UpVote extends Component {
     constructor(props) {
         super(props)
-        const {profile} = this.props
         this.state = {
-            listOfInfo: [
-                {
-                    title: 'test1 for sorting',
-                    description: 'test description',
-                    avatar: profile.picture,
-                    votes: 1,
-                    blockThumbUp: false,
-                    blockThumbDown: true
-                },
-                                {
-                    title: 'test2 for sorting',
-                    description: 'test description',
-                    avatar: profile.picture,
-                    votes: 2,
-                    blockThumbUp: false,
-                    blockThumbDown: true
-                },
-                                {
-                    title: 'test3 for sorting',
-                    description: 'test description',
-                    avatar: profile.picture,
-                    votes: 3,
-                    blockThumbUp: false,
-                    blockThumbDown: true
-                }
-            ],
+            listOfInfo: [],
             title: '',
-            description: '',
-            infoValue: ''
+            description: ''
         }
         this.handleAdd = this.handleAdd.bind(this)
     }
 
     handleAdd() {
-        this.handleInfoValue()
+        console.log('handleAdd')
         const {profile} = this.props
         const newListOfInfo = this.state.listOfInfo.concat({
             title: this.state.title,
@@ -86,9 +59,7 @@ class UpVote extends Component {
             blockThumbUp: false,
             blockThumbDown: true
         });
-        console.log(newListOfInfo)
         this.setState({ listOfInfo: newListOfInfo, title: '', description: '' })
-
     }
 
     handleRemove(i) {
@@ -106,8 +77,7 @@ class UpVote extends Component {
     }
 
     handleThumbUp = (i) => {
-        console.log('handleThumbUp')
-        console.log(i)
+        console.log('handleThumbUp: ', i)
         let change = this.state
         change.listOfInfo[i].votes += 1
         change.listOfInfo[i].blockThumbUp = true
@@ -115,11 +85,12 @@ class UpVote extends Component {
         this.setState(change)
         //Sort list
         this.sortListOfObjects (this.state.listOfInfo, 'votes')
+        //set infoValue state on upper component
+        this.props.handleInfoValue(this.state.listOfInfo[0].title)
     }
 
     handleThumbDown = (i) => {
-        console.log('handleThumbDown')
-        console.log(i)
+        console.log('handleThumbDown: ', i)
         let change = this.state
         change.listOfInfo[i].votes -= 1
         change.listOfInfo[i].blockThumbUp = false
@@ -127,16 +98,8 @@ class UpVote extends Component {
         this.setState(change)
         //sort list
         this.sortListOfObjects (this.state.listOfInfo, 'votes')
-    }
-
-    handleInfoValue = () => {
-        console.log('handleInfoValue')
-        let change = this.state
-        //Calculate infoValue based on most voted
-        console.log(this.state.listOfInfo[0])
-        change.infoValue = this.state.listOfInfo[0].title
-        this.setState(change)
-        this.props.handleSaveInfoValue(this.props.row, this.props.col, change.infoValue)//:))))))) done it
+        //set infoValue state on upper component
+        this.props.handleInfoValue(this.state.listOfInfo[0].title)
     }
 
     //TODO::place this in separate utils file
@@ -206,10 +169,6 @@ class UpVote extends Component {
                 >
                     {this.createlistOfInfo()}
                 </ReactCSSTransitionGroup>
-                <hr />
-                col : {this.props.col}  row : {this.props.row}
-                <br />
-                Info Value: {this.state.infoValue}
             </div>
         )
     }
