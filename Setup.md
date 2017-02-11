@@ -7,7 +7,7 @@ npm install
 npm start
 Open http://localhost:3000/
 Open http://localhost:3000/explorer/
-Check browser dev tools console for errors
+Check browser dev tools console for errors.
 
 FRONTEND
 Open cmd
@@ -18,4 +18,4 @@ npm install
 npm start
 if asked Would you like to run the app on another port instead? [Y/n] choose y
 Open http://localhost:3001/
-Check browser dev tools console for errors
+Check browser dev tools console for errors.
