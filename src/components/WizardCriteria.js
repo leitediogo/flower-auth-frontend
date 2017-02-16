@@ -30,7 +30,7 @@ class WizardCriteria extends Component {
             open: false,
             tmpCritName: '',
             tmpCritDesc: '',
-            tmpCritId: '1'
+            tmpCritId: '2' //Initial criteria Id, 2 because fo table headers
         }
     }
 
@@ -52,7 +52,7 @@ class WizardCriteria extends Component {
     handleSendSaveCriteria = () => {
         console.log('handleSendSaveCriteria')
         //update global state
-        this.props.handleSaveCriteria( this.state.tmpCritName, this.state.tmpCritDesc, this.state.tmpCritId)
+        this.props.handleSaveCriteria( this.state.tmpCritName, this.state.tmpCritDesc, this.state.tmpCritId++)
         //close modal
         this.setState({ open: false })
         //reset tmps 

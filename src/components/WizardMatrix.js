@@ -21,8 +21,15 @@ class WizardMatrix extends Component {
     componentWillMount() {
         console.log('componentWillMount')
         console.log(this.props.decision)
+        //Populate default info cells
+        let newInfo = []
+        this.props.decision.choices.map((choice) => (
+            this.props.decision.criteria.map((criterion) => (
+                newInfo = newInfo.concat({ id: choice.id + ':' + criterion.id, name: choice.name + ':' + criterion.name })
+            ))
+        ))
         let change = this.state
-        change.info = [{ id: '2:2', name: 'choice1-crit1', description: 'teste1' }]
+        change.info = newInfo
         this.setState(change)
         console.log(this.state)
     }
@@ -104,6 +111,9 @@ class WizardMatrix extends Component {
                         {this.props.decision.choices.map((choice, index) => (
                             <TableRow key={index}>
                                 <TableRowColumn key={index}>{choice.name}</TableRowColumn>
+                                   {this.props.decision.criteria.map((criterion, index) => (
+                                        <TableRowColumn key={index}>{this.state.info.filter(info => info.id === choice.id + ':' + criterion.id)[0].name}</TableRowColumn>
+                                    ))}
                             </TableRow>
                         ))}
                     </TableBody>
