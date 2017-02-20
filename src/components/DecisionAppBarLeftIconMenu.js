@@ -28,28 +28,28 @@ class DecisionAppBarLeftIconMenu extends Component {
 
     render() {
         return (
-                <div>
-                    <IconButton onTouchTap={this.handleToggle}>
-                        <MenuIcon color='white' />
-                    </IconButton>
-                    <Drawer
-                        docked={false}
-                        width={200}
-                        open={this.state.open}
-                        onRequestChange={(open) => this.setState({ open })}
-                        >
-                        <br />
-                        <br />
-                        <MenuItem primaryText="Government" leftIcon={<Accountbalance />} onClick={() => this.handleClickCategory('Government')}/>
-                        <MenuItem primaryText="Consumer" leftIcon={<Kitchen />}  onClick={() => this.handleClickCategory('Consumer')}/>
-                        <MenuItem primaryText="Corporate" leftIcon={<BusinessCenter />}  onClick={() => this.handleClickCategory('Corporate')}/>
-                        <MenuItem primaryText="Finance" leftIcon={<AttachMoney />}  onClick={() => this.handleClickCategory('Finance')}/>
-                        <MenuItem primaryText="Legal" leftIcon={<Gavel />}  onClick={() => this.handleClickCategory('Legal')}/>
-                        <MenuItem primaryText="Social" leftIcon={<Share />}  onClick={() => this.handleClickCategory('Social')}/>
-                        <MenuItem primaryText="Educational" leftIcon={<School />}  onClick={() => this.handleClickCategory('Educational')}/>
-                        <MenuItem primaryText="All" leftIcon={<Accessibility />}  onClick={() => this.handleClickCategory('All')}/>
-                    </Drawer>
-                </div>
+            <div>
+                <IconButton onTouchTap={this.handleToggle}>
+                    <MenuIcon color='white' />
+                </IconButton>
+                <Drawer
+                    docked={false}
+                    width={200}
+                    open={this.state.open}
+                    onRequestChange={(open) => this.setState({ open })}
+                >
+                    <br />
+                    <br />
+                    <MenuItem primaryText="Government" leftIcon={<Accountbalance />} onClick={() => this.handleClickCategory('Government')} />
+                    <MenuItem primaryText="Consumer" leftIcon={<Kitchen />} onClick={() => this.handleClickCategory('Consumer')} />
+                    <MenuItem primaryText="Corporate" leftIcon={<BusinessCenter />} onClick={() => this.handleClickCategory('Corporate')} />
+                    <MenuItem primaryText="Finance" leftIcon={<AttachMoney />} onClick={() => this.handleClickCategory('Finance')} />
+                    <MenuItem primaryText="Legal" leftIcon={<Gavel />} onClick={() => this.handleClickCategory('Legal')} />
+                    <MenuItem primaryText="Social" leftIcon={<Share />} onClick={() => this.handleClickCategory('Social')} />
+                    <MenuItem primaryText="Educational" leftIcon={<School />} onClick={() => this.handleClickCategory('Educational')} />
+                    <MenuItem primaryText="All" leftIcon={<Accessibility />} onClick={() => this.handleClickCategory('All')} />
+                </Drawer>
+            </div>
         )
     }
 }

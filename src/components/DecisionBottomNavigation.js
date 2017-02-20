@@ -10,7 +10,7 @@ const recentsIcon = <IconRecents />
 const favoritesIcon = <IconFavorites />
 const myDecisionsIcon = <AccountCircle />
 
-let style ={
+let style = {
     position: "fixed",
     bottom: "0px",
     width: "100%",
@@ -26,7 +26,7 @@ class DecisionCatalogBottomNavigation extends Component {
     render() {
         const {profile} = this.props
         return (
-                <div style={style}>
+            <div style={style}>
                 {(profile) ?
                     <Paper zDepth={1}>
                         <BottomNavigation selectedIndex={this.state.selectedIndex}>
@@ -34,21 +34,21 @@ class DecisionCatalogBottomNavigation extends Component {
                                 label="Recents"
                                 icon={recentsIcon}
                                 onTouchTap={() => this.select(0)}
-                                />
+                            />
                             <BottomNavigationItem
                                 label="Favorites"
                                 icon={favoritesIcon}
                                 onTouchTap={() => this.select(1)}
-                                />
+                            />
                             <BottomNavigationItem
                                 label="My Decisions"
                                 icon={myDecisionsIcon}
                                 onTouchTap={() => this.select(2)}
-                                />
+                            />
                         </BottomNavigation>
                     </Paper>
-                     : ''}
-                </div>
+                    : ''}
+            </div>
         )
     }
 }

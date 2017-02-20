@@ -25,7 +25,8 @@ class WizardMatrix extends Component {
         let newInfo = []
         this.props.decision.choices.map((choice) => (
             this.props.decision.criteria.map((criterion) => (
-                newInfo = newInfo.concat({ id: choice.id + ':' + criterion.id, name: choice.name + ':' + criterion.name })
+                //newInfo = newInfo.concat({ id: choice.id + ':' + criterion.id, name: choice.name + ':' + criterion.name })
+                newInfo = newInfo.concat({ id: choice.id + ':' + criterion.id, name: ' ' })
             ))
         ))
         let change = this.state

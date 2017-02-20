@@ -18,10 +18,10 @@ class DecisionAppBarRightIconMenu extends Component {
                     iconButtonElement={<IconButton><Avatar src={profile.picture} size={30} /></IconButton>}
                     anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
                     targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-                    >
+                >
                     <MenuItem primaryText="Settings" href="/profile/edit" />
                     <MenuItem primaryText="Help" />
-                    <MenuItem primaryText="Sign out" onClick={() => { logout() } } />
+                    <MenuItem primaryText="Sign out" onClick={() => { logout() }} />
                 </IconMenu>
             </div>
         )

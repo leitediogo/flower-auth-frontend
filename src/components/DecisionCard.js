@@ -21,29 +21,29 @@ class DecisionCard extends Component {
 
     render() {
         return (
-                <div>
-                    <Card zDepth={1} style={style}>
-                        <CardHeader 
-                            title="Created By" 
-                            subtitle={this.props.decision.definition.createdBy} 
-                            avatar={this.props.decision.definition.ownerAvatar} 
-                            actAsExpander={true}
-                            showExpandableButton={true}
-                        />
-                        <CardTitle 
-                            title={this.props.decision.definition.name} 
-                            subtitle={this.props.decision.definition.category} 
-                        />
-                        <CardText>{this.props.decision.definition.description}</CardText>
-                        <CardMedia expandable={true}>
-                            <p>decision detail</p>
-                        </CardMedia>
-                        <CardActions expandable={true}>
-                            <FlatButton label="Edit" onClick={this.handleEdit}/>
-                            <FlatButton label="View" href="\decisionview"/>
-                        </CardActions>
-                    </Card>
-                </div>
+            <div>
+                <Card zDepth={1} style={style}>
+                    <CardHeader
+                        title="Created By"
+                        subtitle={this.props.decision.definition.createdBy}
+                        avatar={this.props.decision.definition.ownerAvatar}
+                        actAsExpander={true}
+                        showExpandableButton={true}
+                    />
+                    <CardTitle
+                        title={this.props.decision.definition.name}
+                        subtitle={this.props.decision.definition.category}
+                    />
+                    <CardText>{this.props.decision.definition.description}</CardText>
+                    <CardMedia expandable={true}>
+                        <p>decision detail</p>
+                    </CardMedia>
+                    <CardActions expandable={true}>
+                        <FlatButton label="Edit" onClick={this.handleEdit} />
+                        <FlatButton label="View" href="\decisionview" />
+                    </CardActions>
+                </Card>
+            </div>
         )
     }
 }
