@@ -14,7 +14,7 @@ let style = {
 class DecisionAddFloatingButton extends Component {
     render() {
         return (
-            <FloatingActionButton style={style} href="\wizard">
+            <FloatingActionButton style={style} href="\decisionadd">
                 <ContentAdd />
             </FloatingActionButton>
         )

@@ -13,7 +13,7 @@ import DecisionAppBar from './DecisionAppBar'
 import DecisionBottomNavigation from './DecisionBottomNavigation'
 import UpVote from './UpVote'
 import TestProfile from './TestProfile'
-import DecisionEdit from './DecisionEdit'
+import DecisionParticipate from './DecisionParticipate'
 import DecisionView from './DecisionView'
 import DecisionAdd from './DecisionAdd'
 
@@ -51,6 +51,7 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
+      //TODO: remove filtered decisions from state
       filteredDecisions: [],
       allDecisions: []
     }
@@ -58,7 +59,6 @@ class App extends Component {
 
   componentDidMount() {
     agent.get('http://' + api_server_name + ':' + api_server_port + '/api/Decisions')
-      //agent.get('http://localhost:3000/api/Decisions')
       .then(function (res) {
         this.setState({ allDecisions: res.body });
         this.setState({ filteredDecisions: res.body })
@@ -92,14 +92,14 @@ class App extends Component {
             <Route path="/upvote" component={UpVote} />
             <Route path="/testmatrix" component={TestMatrix} />
             <Route path="/testicons" component={TestIcons} />
-            <Route path="/decisionadd" component={DecisionAdd} />
+            <Route path="/wizard" component={Wizard} />
             {/* End Testing Routes */}
             <Route onEnter={requireAuth}>
               {/* Place all authenticated routes here */}
               <Route path="/profile/edit" component={EditProfile} />
-              <Route path="/wizard" component={Wizard} />
+              <Route path="/decisionadd" component={DecisionAdd} />
               <Route path="/testprofile" component={TestProfile} />
-              <Route path="/decisionedit" component={DecisionEdit} />
+              <Route path="/decisionparticipate" component={DecisionParticipate} />
               <Route path="/decisionview" component={DecisionView} />
             </Route>
           </Router>

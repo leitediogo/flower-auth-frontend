@@ -10,12 +10,26 @@ let style = {
 
 class DecisionCard extends Component {
 
-    handleEdit = () => {
-        console.log('edit')
+    constructor(props, context) {
+        super(props, context)
+        this.state = {
+            decision: this.props.decision.definition
+        }
+    }
+
+    handleParticipate = () => {
+        console.log('Decision::handleParticipate')
         browserHistory.push({
-            pathname: '/decisionedit',
-            //search: '?process=' + this.props.process.name,
-            state: { decision: this.props.decision.definition }
+            pathname: '/decisionparticipate',
+            state: { decision: this.state.decision }
+        })
+    }
+
+    handleView = () => {
+        console.log('DecisionCard::handleView')
+        browserHistory.push({
+            pathname: '/decisionview',
+            state: { decision: this.state.decision }
         })
     }
 
@@ -39,8 +53,8 @@ class DecisionCard extends Component {
                         <p>decision detail</p>
                     </CardMedia>
                     <CardActions expandable={true}>
-                        <FlatButton label="Edit" onClick={this.handleEdit} />
-                        <FlatButton label="View" href="\decisionview" />
+                        <FlatButton label="Participate" onClick={this.handleParticipate} />
+                        <FlatButton label="View" onClick={this.handleView} />
                     </CardActions>
                 </Card>
             </div>

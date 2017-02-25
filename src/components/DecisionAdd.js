@@ -8,6 +8,7 @@ import TextField from 'material-ui/TextField'
 import SelectField from 'material-ui/SelectField'
 import Paper from 'material-ui/Paper'
 import MenuItem from 'material-ui/MenuItem'
+import utils from '../utils'
 
 const api_server_name = process.env.REACT_APP_API_SERVER_NAME
 const api_server_port = process.env.REACT_APP_API_SERVER_PORT
@@ -41,13 +42,18 @@ class DecisionAdd extends Component {
                 info: []
             }
         }
-        /*
+
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleSelectCategoryChange = this.handleSelectCategoryChange.bind(this)
-        this.postDecision = this.handleBackpostDecision.bind(this)
+        this.postDecision = this.postDecision.bind(this)
         this.handleSave = this.handleSave.bind(this)
         this.handleBack = this.handleBack.bind(this)
-        */
+
+    }
+
+    componentWillMount() {
+        console.log('DecisionAdd::componentWillMount')
+        utils.uuid()
     }
 
     handleInputChange = (e) => {
@@ -88,8 +94,9 @@ class DecisionAdd extends Component {
     handleSave() {
         console.log('handleSave')
         this.postDecision()
-        browserHistory.push('/')
-        //window.location.reload()
+        browserHistory.push('/');
+        //TODO: eliminate window.location.reload()
+        window.location.reload()
     }
 
     handleBack() {
