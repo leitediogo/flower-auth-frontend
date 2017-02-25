@@ -10,18 +10,11 @@ let style = {
 
 class DecisionCard extends Component {
 
-    constructor(props, context) {
-        super(props, context)
-        this.state = {
-            decision: this.props.decision.definition
-        }
-    }
-
     handleParticipate = () => {
-        console.log('Decision::handleParticipate')
+        console.log('DecisionCard::handleParticipate')
         browserHistory.push({
             pathname: '/decisionparticipate',
-            state: { decision: this.state.decision }
+            state: { decision: this.props.decision.definition }
         })
     }
 
@@ -29,7 +22,7 @@ class DecisionCard extends Component {
         console.log('DecisionCard::handleView')
         browserHistory.push({
             pathname: '/decisionview',
-            state: { decision: this.state.decision }
+            state: { decision: this.props.decision.definition }
         })
     }
 
