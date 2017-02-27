@@ -38,20 +38,27 @@ let styles = {
 }
 
 class UpVote extends Component {
-    constructor(props) {
-        super(props)
+
+    constructor() {
+        console.log('UpVote::constructor')
+        super()
         this.state = {
-            listOfInfo: [],
+            list: [],
+            topRecord: {
+                title: 'init',
+                description: 'init',
+                votes: 0
+            },
             title: '',
             description: ''
         }
-        this.handleAdd = this.handleAdd.bind(this)
+        this.handleAddToList = this.handleAddToList.bind(this)
     }
 
-    handleAdd() {
-        console.log('handleAdd')
+    handleAddToList() {
+        console.log('UpVote::handleAddToList')
         const {profile} = this.props
-        const newListOfInfo = this.state.listOfInfo.concat({
+        const newlist = this.state.list.concat({
             title: this.state.title,
             description: this.state.description,
             avatar: profile.picture,
@@ -59,17 +66,21 @@ class UpVote extends Component {
             blockThumbUp: false,
             blockThumbDown: true
         });
-        this.setState({ listOfInfo: newListOfInfo, title: '', description: '' })
+        this.setState({ list: newlist, title: '', description: '' })
+        //TODO: persist decision for realtime
     }
 
+    //TODO: Only creator removes
     handleRemove(i) {
-        console.log('handleRemove')
-        let newListOfInfo = this.state.listOfInfo.slice()
-        newListOfInfo.splice(i, 1);
-        this.setState({ listOfInfo: newListOfInfo })
+        console.log('UpVote::handleRemove')
+        let newlist = this.state.list.slice()
+        newlist.splice(i, 1);
+        this.setState({ list: newlist })
+        //TODO: persist decision for realtime
     }
 
     handleInputChange = (e) => {
+        console.log('UpVote::handleInputChange')
         let change = this.state
         change[e.target.id] = e.target.value
         this.setState(change)
@@ -77,29 +88,35 @@ class UpVote extends Component {
     }
 
     handleThumbUp = (i) => {
-        console.log('handleThumbUp: ', i)
+        console.log('UpVote::handleThumbUp: ', i)
         let change = this.state
-        change.listOfInfo[i].votes += 1
-        change.listOfInfo[i].blockThumbUp = true
-        change.listOfInfo[i].blockThumbDown = false
+        change.list[i].votes += 1
+        change.list[i].blockThumbUp = true
+        change.list[i].blockThumbDown = false
         this.setState(change)
         //Sort list
-        this.sortListOfObjects (this.state.listOfInfo, 'votes')
+        this.sortListOfObjects(this.state.list, 'votes')
         //set infoValue state on upper component
-        this.props.handleInfoValue(this.state.listOfInfo[0].title)
+        this.props.handleInfoValue(this.state.list[0].title)
+        //update Top Record
+        this.setState({ topRecord: this.state.list[0] })
+        //TODO: persist decision for realtime
     }
 
     handleThumbDown = (i) => {
-        console.log('handleThumbDown: ', i)
+        console.log('UpVote::handleThumbDown: ', i)
         let change = this.state
-        change.listOfInfo[i].votes -= 1
-        change.listOfInfo[i].blockThumbUp = false
-        change.listOfInfo[i].blockThumbDown = true
+        change.list[i].votes -= 1
+        change.list[i].blockThumbUp = false
+        change.list[i].blockThumbDown = true
         this.setState(change)
         //sort list
-        this.sortListOfObjects (this.state.listOfInfo, 'votes')
+        this.sortListOfObjects(this.state.list, 'votes')
         //set infoValue state on upper component
-        this.props.handleInfoValue(this.state.listOfInfo[0].title)
+        this.props.handleInfoValue(this.state.list[0].title)
+        //update Top Record
+        this.setState({ topRecord: this.state.list[0] })
+        //TODO: persist decision for realtime
     }
 
     //TODO::place this in separate utils file
@@ -109,9 +126,9 @@ class UpVote extends Component {
         })
     }
 
-    createlistOfInfo = () => {
+    createlist = () => {
         return (
-            this.state.listOfInfo.map((info, i) => (
+            this.state.list.map((info, i) => (
                 <div key={i}>
                     <Card zDepth={3} style={styles.cardStyle} >
                         <div style={styles.divStyleLeft}>
@@ -141,6 +158,9 @@ class UpVote extends Component {
         return (
             <div style={styles.divStyleCenter}>
                 <br />
+                <br />
+                TOP RECORD : {this.state.topRecord.title}
+                <br />
                 <TextField
                     id="title"
                     hintText="Insert information"
@@ -158,7 +178,7 @@ class UpVote extends Component {
                 />
                 <br />
                 <FlatButton
-                    onClick={this.handleAdd}
+                    onClick={this.handleAddToList}
                     label="Add" />
                 <ReactCSSTransitionGroup
                     transitionName="example"
@@ -167,7 +187,7 @@ class UpVote extends Component {
                     transitionAppear={true}
                     transitionAppearTimeout={1000}
                 >
-                    {this.createlistOfInfo()}
+                    {this.createlist()}
                 </ReactCSSTransitionGroup>
             </div>
         )
