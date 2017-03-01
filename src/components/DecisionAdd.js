@@ -29,9 +29,10 @@ class DecisionAdd extends Component {
         const {profile} = this.props
         this.state = {
             decision: {
+                id: '',
                 name: '',
                 description: '',
-                status: 'CREATING',//COLLABORATING | DECIDING
+                status: 'CREATING',//PARTICIPATING | DECIDING | DECIDED
                 category: '',
                 createdBy: profile.name,
                 owner: profile.name,
@@ -42,22 +43,15 @@ class DecisionAdd extends Component {
                 info: []
             }
         }
-
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleSelectCategoryChange = this.handleSelectCategoryChange.bind(this)
         this.postDecision = this.postDecision.bind(this)
         this.handleSave = this.handleSave.bind(this)
-        this.handleBack = this.handleBack.bind(this)
-
-    }
-
-    componentWillMount() {
-        console.log('DecisionAdd::componentWillMount')
-        utils.uuid()
-    }
+        this.handleCancel = this.handleCancel.bind(this)
+    } 
 
     handleInputChange = (e) => {
-        console.log('handleInputChange')
+        console.log('DecisionAdd::handleInputChange')
         let change = this.state
         change.decision[e.target.id] = e.target.value
         this.setState(change)
@@ -66,7 +60,7 @@ class DecisionAdd extends Component {
 
     //TODO: Generalize selects per name
     handleSelectCategoryChange = (event, index, value) => {
-        console.log('handleSelectCategoryChange')
+        console.log('DecisionAdd::handleSelectCategoryChange')
         let change = this.state
         change.decision.category = value
         this.setState(change)
@@ -75,7 +69,7 @@ class DecisionAdd extends Component {
 
     postDecision() {
         //TODO: Handle Error
-        console.log('postDecision')
+        console.log('DecisionAdd::postDecision')
         agent.post('http://' + api_server_name + ':' + api_server_port + '/api/Decisions')
             .send({
                 name: this.state.decision.name,
@@ -92,17 +86,19 @@ class DecisionAdd extends Component {
     }
 
     handleSave() {
-        console.log('handleSave')
+        console.log('DecisionAdd::handleSave')
+        //Generate Decision uuid
+        console.log('Decision Id: ',utils.generateUUID())//Not used 
+        //Not updating state because id already defined in API
         this.postDecision()
         browserHistory.push('/');
         //TODO: eliminate window.location.reload()
         window.location.reload()
     }
 
-    handleBack() {
-        console.log('handleBack')
+    handleCancel() {
+        console.log('DecisionAdd::handleCancel')
         browserHistory.push('/')
-        window.location.reload()
     }
 
     render() {
@@ -144,8 +140,8 @@ class DecisionAdd extends Component {
                     <br />
                     <div style={{ marginTop: 12 }}>
                         <FlatButton
-                            label="Back"
-                            onTouchTap={this.handleBack}
+                            label="Cancel"
+                            onTouchTap={this.handleCancel}
                             style={{ marginRight: 12 }}
                         />
                         <RaisedButton

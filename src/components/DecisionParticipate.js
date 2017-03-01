@@ -124,7 +124,8 @@ class DecisionParticipate extends Component {
             <div>
                 <br />
                 <b> Decision: </b>{this.props.location.state.decision.name}&nbsp;&nbsp;&nbsp;
-                 <b> Description: </b>{this.props.location.state.decision.description}
+                 <b> Description: </b>{this.props.location.state.decision.description}&nbsp;&nbsp;&nbsp;
+                 <b> Category: </b>{this.props.location.state.decision.category}
                 <br />
                 <br />
                 <FlatButton
@@ -184,9 +185,8 @@ class DecisionParticipate extends Component {
                         onChange={this.handleInputChange}
                     />
                 </Dialog>
-                MATRIX
                 <br />
-                <DecisionMatrix />
+                <DecisionMatrix decision={this.state.decision}/>
             </div>
         )
     }
