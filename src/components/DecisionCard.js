@@ -14,7 +14,7 @@ class DecisionCard extends Component {
         console.log('DecisionCard::handleParticipate')
         browserHistory.push({
             pathname: '/decisionparticipate',
-            state: { decision: this.props.decision.definition }
+            state: { decision: this.props.decision.content }
         })
     }
 
@@ -22,7 +22,7 @@ class DecisionCard extends Component {
         console.log('DecisionCard::handleView')
         browserHistory.push({
             pathname: '/decisionview',
-            state: { decision: this.props.decision.definition }
+            state: { decision: this.props.decision.content }
         })
     }
 
@@ -32,16 +32,16 @@ class DecisionCard extends Component {
                 <Card zDepth={1} style={style}>
                     <CardHeader
                         title="Created By"
-                        subtitle={this.props.decision.definition.createdBy}
-                        avatar={this.props.decision.definition.ownerAvatar}
+                        subtitle={this.props.decision.content.createdBy}
+                        avatar={this.props.decision.content.ownerAvatar}
                         actAsExpander={true}
                         showExpandableButton={true}
                     />
                     <CardTitle
-                        title={this.props.decision.definition.name}
-                        subtitle={this.props.decision.definition.category}
+                        title={this.props.decision.content.name}
+                        subtitle={this.props.decision.content.category}
                     />
-                    <CardText>{this.props.decision.definition.description}</CardText>
+                    <CardText>{this.props.decision.content.description}</CardText>
                     <CardMedia expandable={true}>
                         <p>decision detail</p>
                     </CardMedia>
