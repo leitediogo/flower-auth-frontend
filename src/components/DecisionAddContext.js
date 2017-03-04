@@ -12,7 +12,7 @@ class DecisionAddContext extends Component {
                     hintText="Insert Decision Name"
                     floatingLabelText="Decision Name"
                     value={this.props.decision.name}
-                    onChange={this.props.handleInputChange}
+                    onChange={this.props.handleInputDecisionChange}
                 />
                 <br />
                 <TextField
@@ -20,7 +20,7 @@ class DecisionAddContext extends Component {
                     hintText="Insert Decision Description"
                     floatingLabelText="Decision Description"
                     value={this.props.decision.description}
-                    onChange={this.props.handleInputChange}
+                    onChange={this.props.handleInputDecisionChange}
                     multiLine={true}
                     rows={2}
                 />
@@ -30,7 +30,7 @@ class DecisionAddContext extends Component {
                     hintText="Insert Decision Category"
                     floatingLabelText="Decision Category"
                     value={this.props.decision.category}
-                    onChange={this.props.handleSelectCategoryChange}>
+                    onChange={this.props.handleSelectDecisionCategoryChange}>
                     <MenuItem value={'Government'} primaryText="Government" />
                     <MenuItem value={'Consumer'} primaryText="Consumer" />
                     <MenuItem value={'Corporate'} primaryText="Corporate" />

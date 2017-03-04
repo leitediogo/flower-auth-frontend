@@ -16,7 +16,7 @@ class DecisionAdd extends Component {
 
     constructor(props, context) {
         super(props, context)
-        const {profile} = this.props
+        const { profile } = this.props
         this.state = {
             decision: {
                 id: '',
@@ -37,9 +37,6 @@ class DecisionAdd extends Component {
             choiceName: '',
             choiceDescription: ''
         }
-        this.handleInputChange = this.handleInputChange.bind(this)
-        this.handleInputChangeForTemp = this.handleInputChangeForTemp.bind(this)
-        this.handleSelectCategoryChange = this.handleSelectCategoryChange.bind(this)
         this.postDecision = this.postDecision.bind(this)
         this.handleSaveDecision = this.handleSaveDecision.bind(this)
         this.handleCancelDecision = this.handleCancelDecision.bind(this)
@@ -52,25 +49,25 @@ class DecisionAdd extends Component {
         console.log(e.target.id)
         console.log(e.target.value)
         let change = this.state
-        change.decision[e.target.id] = e.target.value
-        this.setState(change)
-        console.log(this.state)
-    }
-
-    //TODO:: Remove this shit
-    handleInputChangeForTemp = (e) => {
-        console.log('DecisionAdd::handleInputChangeForTemp')
-        console.log(e.target.id)
-        console.log(e.target.value)
-        let change = this.state
         change[e.target.id] = e.target.value
         this.setState(change)
         console.log(this.state)
     }
 
+    //TODO: Remove this, find a way to pass id with . in fields
+    handleDecisionInputChange = (e) => {
+        console.log('DecisionAdd::handleDecisionInputChange')
+        console.log(e.target.id)
+        console.log(e.target.value)
+        let change = this.state
+        change.decision[e.target.id] = e.target.value
+        this.setState(change)
+        console.log(this.state)
+    }
+
     //TODO: Generalize selects per name
-    handleSelectCategoryChange = (event, index, value) => {
-        console.log('DecisionAdd::handleSelectCategoryChange')
+    handleSelectDecisionCategoryChange = (event, index, value) => {
+        console.log('DecisionAdd::handleSelectDecisionCategoryChange')
         let change = this.state
         change.decision.category = value
         this.setState(change)
@@ -151,11 +148,11 @@ class DecisionAdd extends Component {
             <div>
                 <DecisionAddContext
                     decision={this.state.decision}
-                    handleInputChange={this.handleInputChange}
-                    handleSelectCategoryChange={this.handleSelectCategoryChange} />
+                    handleInputDecisionChange={this.handleInputDecisionChange}
+                    handleSelectDecisionCategoryChange={this.handleSelectDecisionCategoryChange} />
                 <DecisionMatrix
                     decision={this.state.decision}
-                    handleInputChange={this.handleInputChangeForTemp}
+                    handleInputChange={this.handleInputChange}
                     handleSaveCriterion={this.handleSaveCriterion}
                     handleSaveChoice={this.handleSaveChoice}
                     criterionName={this.state.criterionName}

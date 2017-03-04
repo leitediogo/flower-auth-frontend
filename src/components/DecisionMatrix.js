@@ -98,7 +98,7 @@ class DecisionMatrix extends Component {
             />,
         ]
         return (
-            <div>
+            <div style={{ marginLeft: 12, marginRight: 12 }}>
                 <br />
                 <br />
                 <FlatButton label="Add Choices" onTouchTap={this.handleOpenChoiceModal} />
@@ -122,6 +122,7 @@ class DecisionMatrix extends Component {
                         ))}
                     </TableBody>
                 </Table>
+                <FlatButton label="+" onTouchTap={this.handleOpenChoiceModal} />
                 <Dialog
                     title="Add Criteria"
                     actions={criteriaModalActions}

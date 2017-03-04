@@ -9,6 +9,9 @@ import ThumbDown from 'material-ui/svg-icons/action/thumb-down'
 import Delete from 'material-ui/svg-icons/action/delete'
 import { connectProfile } from '../auth'
 
+//Add number of comments to top
+//Change comment to bellow 
+
 let styles = {
     cardStyle: {
         margin: 20,
