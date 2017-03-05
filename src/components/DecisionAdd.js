@@ -37,14 +37,18 @@ class DecisionAdd extends Component {
             choiceName: '',
             choiceDescription: ''
         }
+
+        this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleDecisionInputChange = this.handleDecisionInputChange.bind(this)
+        this.handleSelectDecisionCategoryChange = this.handleSelectDecisionCategoryChange.bind(this)
+        this.handleSaveCriterion = this.handleSaveCriterion.bind(this)
+        this.handleSaveChoice = this.handleSaveChoice.bind(this)
         this.postDecision = this.postDecision.bind(this)
         this.handleSaveDecision = this.handleSaveDecision.bind(this)
         this.handleCancelDecision = this.handleCancelDecision.bind(this)
-        this.handleSaveCriterion = this.handleSaveCriterion.bind(this)
-        this.handleSaveChoice = this.handleSaveChoice.bind(this)
     }
 
-    handleInputChange = (e) => {
+    handleInputChange(e) {
         console.log('DecisionAdd::handleInputChange')
         console.log(e.target.id)
         console.log(e.target.value)
@@ -55,7 +59,7 @@ class DecisionAdd extends Component {
     }
 
     //TODO: Remove this, find a way to pass id with . in fields
-    handleDecisionInputChange = (e) => {
+    handleDecisionInputChange(e) {
         console.log('DecisionAdd::handleDecisionInputChange')
         console.log(e.target.id)
         console.log(e.target.value)
@@ -66,7 +70,7 @@ class DecisionAdd extends Component {
     }
 
     //TODO: Generalize selects per name
-    handleSelectDecisionCategoryChange = (event, index, value) => {
+    handleSelectDecisionCategoryChange(event, index, value) {
         console.log('DecisionAdd::handleSelectDecisionCategoryChange')
         let change = this.state
         change.decision.category = value
