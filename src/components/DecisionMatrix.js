@@ -23,37 +23,37 @@ class DecisionMatrix extends Component {
         this.handleCloseChoiceModal = this.handleCloseChoiceModal.bind(this)
     }
 
-    handleSaveInformationCell = () => {
+    handleSaveInformationCell() {
         console.log('DecisionMatrix::handleSaveInformationCell')
         console.log('clicked row: ', this.state.selectedRow, ' column: ', this.state.selectedColumn)
         this.handleCloseInfoModal()
     }
 
-    handleOpenInfoModal = (rowNumber, columnId) => {
+    handleOpenInfoModal(rowNumber, columnId) {
         console.log('DecisionMatrix::handleOpenModal')
         console.log('clicked row: ', rowNumber, ' column: ', columnId)
         this.setState({ selectedRow: rowNumber, selectedColumn: columnId })
         this.setState({ openInfoModal: true })
     }
 
-    handleCloseInfoModal = () => {
+    handleCloseInfoModal() {
         console.log('DecisionMatrix::handleCloseModal')
         this.setState({ openInfoModal: false })
     }
 
-    handleOpenCriteriaModal = () => {
+    handleOpenCriteriaModal() {
         this.setState({ openCriteriaModal: true })
     }
 
-    handleCloseCriteriaModal = () => {
+    handleCloseCriteriaModal() {
         this.setState({ openCriteriaModal: false })
     }
 
-    handleOpenChoiceModal = () => {
+    handleOpenChoiceModal() {
         this.setState({ openChoiceModal: true })
     }
 
-    handleCloseChoiceModal = () => {
+    handleCloseChoiceModal() {
         this.setState({ openChoiceModal: false })
     }
 
