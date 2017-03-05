@@ -17,13 +17,16 @@ class DecisionAppBarLeftIconMenu extends Component {
     constructor(props) {
         super(props);
         this.state = { open: false };
+        this.handleToggle = this.handleToggle.bind(this);
     }
 
-    handleToggle = () => this.setState({ open: !this.state.open });
+    handleToggle(){
+        this.setState({ open: !this.state.open });
+    } 
 
     handleClickCategory(category) {
-        this.props.filterDecisions(category)
-        this.setState({ open: false })
+        this.props.filterDecisions(category);
+        this.setState({ open: false });
     }
 
     render() {
@@ -32,6 +35,7 @@ class DecisionAppBarLeftIconMenu extends Component {
                 <IconButton onTouchTap={this.handleToggle}>
                     <MenuIcon color='white' />
                 </IconButton>
+
                 <Drawer
                     docked={false}
                     width={200}
