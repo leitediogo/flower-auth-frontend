@@ -152,8 +152,9 @@ class DecisionAdd extends Component {
             <div>
                 <DecisionAddContext
                     decision={this.state.decision}
-                    handleInputDecisionChange={this.handleInputDecisionChange}
+                    handleDecisionInputChange={this.handleDecisionInputChange}
                     handleSelectDecisionCategoryChange={this.handleSelectDecisionCategoryChange} />
+                
                 <DecisionMatrix
                     decision={this.state.decision}
                     handleInputChange={this.handleInputChange}
