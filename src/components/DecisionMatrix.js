@@ -14,19 +14,16 @@ class DecisionMatrix extends Component {
             selectedRow: 0,
             selectedColumn: 0
         }
-        this.handleSaveInformationCell = this.handleSaveInformationCell.bind(this)
+
         this.handleOpenInfoModal = this.handleOpenInfoModal.bind(this)
         this.handleCloseInfoModal = this.handleCloseInfoModal.bind(this)
+        this.handleSaveInfoCell = this.handleSaveInfoCell.bind(this)
         this.handleOpenCriteriaModal = this.handleOpenCriteriaModal.bind(this)
         this.handleCloseCriteriaModal = this.handleCloseCriteriaModal.bind(this)
+        this.handleSaveCriteriaCell = this.handleSaveCriteriaCell.bind(this)
         this.handleOpenChoiceModal = this.handleOpenChoiceModal.bind(this)
         this.handleCloseChoiceModal = this.handleCloseChoiceModal.bind(this)
-    }
-
-    handleSaveInformationCell() {
-        console.log('DecisionMatrix::handleSaveInformationCell')
-        console.log('clicked row: ', this.state.selectedRow, ' column: ', this.state.selectedColumn)
-        this.handleCloseInfoModal()
+        this.handleSaveChoiceCell = this.handleSaveChoiceCell.bind(this)
     }
 
     handleOpenInfoModal(rowNumber, columnId) {
@@ -41,6 +38,12 @@ class DecisionMatrix extends Component {
         this.setState({ openInfoModal: false })
     }
 
+    handleSaveInfoCell() {
+        console.log('DecisionMatrix::handleSaveInfoCell')
+        console.log('clicked row: ', this.state.selectedRow, ' column: ', this.state.selectedColumn)
+        this.handleCloseInfoModal()
+    }
+
     handleOpenCriteriaModal() {
         this.setState({ openCriteriaModal: true })
     }
@@ -49,12 +52,20 @@ class DecisionMatrix extends Component {
         this.setState({ openCriteriaModal: false })
     }
 
+    handleSaveCriteriaCell() {
+        this.handleCloseCriteriaModal()
+    }
+
     handleOpenChoiceModal() {
         this.setState({ openChoiceModal: true })
     }
 
     handleCloseChoiceModal() {
         this.setState({ openChoiceModal: false })
+    }
+
+    handleSaveChoiceCell() {
+        this.handleCloseChoiceModal()
     }
 
     render() {
@@ -68,7 +79,7 @@ class DecisionMatrix extends Component {
                 label="Save"
                 primary={true}
                 keyboardFocused={true}
-                onTouchTap={this.handleSaveInformationCell}
+                onTouchTap={this.handleSaveInfoCell}
             />,
         ]
         const criteriaModalActions = [
@@ -81,7 +92,7 @@ class DecisionMatrix extends Component {
                 label="Save"
                 primary={true}
                 keyboardFocused={true}
-                onTouchTap={this.props.handleSaveCriterion}
+                onTouchTap={this.props.handleSaveCriteriaCell}
             />,
         ]
         const choiceModalActions = [
@@ -94,7 +105,7 @@ class DecisionMatrix extends Component {
                 label="Save"
                 primary={true}
                 keyboardFocused={true}
-                onTouchTap={this.props.handleSaveChoice}
+                onTouchTap={this.props.handleSaveChoiceCell}
             />,
         ]
         return (
