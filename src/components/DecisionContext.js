@@ -3,7 +3,7 @@ import TextField from 'material-ui/TextField'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 
-class DecisionAddContext extends Component {
+class DecisionContext extends Component {
     render() {
         return (
             <div style={{ marginLeft: 12 }}>
@@ -44,4 +44,4 @@ class DecisionAddContext extends Component {
     }
 }
 
-export default DecisionAddContext
+export default DecisionContext

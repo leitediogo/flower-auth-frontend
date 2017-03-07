@@ -3,6 +3,7 @@ import { Table, TableRow, TableBody, TableRowColumn } from 'material-ui/Table'
 import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
+import DecisionCriteriaChoiceUpvote from './DecisionCriteriaChoiceUpvote'
 
 class DecisionMatrix extends Component {
     constructor() {
@@ -53,6 +54,8 @@ class DecisionMatrix extends Component {
     }
 
     handleSaveCriteriaCell() {
+        console.log('DecisionMatrix::handleSaveCriteriaCell')
+        this.props.handleSaveCriterion()        
         this.handleCloseCriteriaModal()
     }
 
@@ -65,6 +68,8 @@ class DecisionMatrix extends Component {
     }
 
     handleSaveChoiceCell() {
+        console.log('DecisionMatrix::handleSaveChoiceCell')
+        this.props.handleSaveChoice()
         this.handleCloseChoiceModal()
     }
 
@@ -92,7 +97,7 @@ class DecisionMatrix extends Component {
                 label="Save"
                 primary={true}
                 keyboardFocused={true}
-                onTouchTap={this.props.handleSaveCriteriaCell}
+                onTouchTap={this.handleSaveCriteriaCell}
             />,
         ]
         const choiceModalActions = [
@@ -105,7 +110,7 @@ class DecisionMatrix extends Component {
                 label="Save"
                 primary={true}
                 keyboardFocused={true}
-                onTouchTap={this.props.handleSaveChoiceCell}
+                onTouchTap={this.handleSaveChoiceCell}
             />,
         ]
         return (
@@ -141,21 +146,10 @@ class DecisionMatrix extends Component {
                     open={this.state.openCriteriaModal}
                     onRequestClose={this.handleCloseCriteriaModal}
                     autoScrollBodyContent={true}>
-                    <TextField
-                        id="criterionName"
-                        hintText="Insert Criterion Name"
-                        floatingLabelText="Criterion Name"
-                        value={this.props.criterionName}
-                        onChange={this.props.handleInputChange}
-                    />
-                    <br />
-                    <TextField
-                        id="criterionDescription"
-                        hintText="Insert Criterion Description"
-                        floatingLabelText="Criterion Description"
-                        value={this.props.criterionDescription}
-                        onChange={this.props.handleInputChange}
-                    />
+                    <DecisionCriteriaChoiceUpvote
+                        criterionName={this.props.criterionName}
+                        criterionDescription={this.props.criterionDescription}
+                        handleInputChange={this.props.handleInputChange} />
                 </Dialog>
                 <Dialog
                     title="Add Choice"

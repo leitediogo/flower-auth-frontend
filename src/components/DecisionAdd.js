@@ -5,7 +5,7 @@ import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 import { browserHistory } from 'react-router'
 import { connectProfile } from '../auth'
-import DecisionAddContext from './DecisionAddContext'
+import DecisionContext from './DecisionContext'
 import DecisionMatrix from './DecisionMatrix'
 
 const api_server_name = process.env.REACT_APP_API_SERVER_NAME
@@ -170,7 +170,7 @@ class DecisionAdd extends Component {
     render() {
         return (
             <div>
-                <DecisionAddContext
+                <DecisionContext
                     decision={this.state.decision}
                     handleDecisionInputChange={this.handleDecisionInputChange}
                     handleSelectDecisionCategoryChange={this.handleSelectDecisionCategoryChange} />
@@ -183,6 +183,7 @@ class DecisionAdd extends Component {
                     criterionDescription={this.state.criterionDescription}
                     choiceName={this.state.choiceName}
                     choiceDescription={this.state.choiceDescription} />
+                  <hr/>  
                 <div style={{ marginTop: 12 }}>
                     <FlatButton
                         label="Cancel"
@@ -190,11 +191,15 @@ class DecisionAdd extends Component {
                         style={{ marginRight: 12 }}
                     />
                     <RaisedButton
-                        label="Save"
+                        label="Save Decision"
                         primary={true}
                         onTouchTap={this.handleSaveDecision}
                     />
                 </div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
             </div>
         );
     }
