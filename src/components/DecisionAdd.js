@@ -48,9 +48,8 @@ class DecisionAdd extends Component {
         this.handleCancelDecision = this.handleCancelDecision.bind(this)
     }
 
-    //Load state for testing matrix
+    //Load some state in criteria and choices for testing matrix
     //Causes warning: TextField is changing a controlled input of type text to be uncontrolled. Input elements should not switch from controlled to uncontrolled (or vice versa). Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://fb.me/react-controlled-components
-
     componentDidMount() {
         let change = this.state
         change.decision = {
