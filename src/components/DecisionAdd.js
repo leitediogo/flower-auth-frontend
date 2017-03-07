@@ -8,7 +8,6 @@ import { connectProfile } from '../auth'
 import DecisionAddContext from './DecisionAddContext'
 import DecisionMatrix from './DecisionMatrix'
 
-
 const api_server_name = process.env.REACT_APP_API_SERVER_NAME
 const api_server_port = process.env.REACT_APP_API_SERVER_PORT
 
@@ -37,6 +36,8 @@ class DecisionAdd extends Component {
             choiceName: '',
             choiceDescription: ''
         }
+        this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleDecisionInputChange = this.handleDecisionInputChange.bind(this)
         this.postDecision = this.postDecision.bind(this)
         this.handleSaveDecision = this.handleSaveDecision.bind(this)
         this.handleCancelDecision = this.handleCancelDecision.bind(this)
@@ -44,7 +45,26 @@ class DecisionAdd extends Component {
         this.handleSaveChoice = this.handleSaveChoice.bind(this)
     }
 
-    handleInputChange = (e) => {
+    //Load state for testing matrix
+    //Causes warning: TextField is changing a controlled input of type text to be uncontrolled. Input elements should not switch from controlled to uncontrolled (or vice versa). Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://fb.me/react-controlled-components
+    componentDidMount() {
+        let change = this.state
+        change.decision = {
+            criteria: [
+                { id: '22342', name: 'criteria1', description: 'desc Crit1' },
+                { id: '32432', name: 'criteria2', description: 'desc Crit2' },
+                { id: '4v345', name: 'criteria3', description: 'desc Crit3' }
+            ],
+            choices: [
+                { id: '2523r45', name: 'choice1', description: 'desc Choice1' },
+                { id: '3234w25', name: 'choice2', description: 'desc Choice2' },
+                { id: '23ewr454', name: 'choice3', description: 'desc Choice3' }
+            ]
+        }
+        this.setState(change)
+    }
+
+    handleInputChange(e) {
         console.log('DecisionAdd::handleInputChange')
         console.log(e.target.id)
         console.log(e.target.value)
@@ -55,7 +75,7 @@ class DecisionAdd extends Component {
     }
 
     //TODO: Remove this, find a way to pass id with . in fields
-    handleDecisionInputChange = (e) => {
+    handleDecisionInputChange(e) {
         console.log('DecisionAdd::handleDecisionInputChange')
         console.log(e.target.id)
         console.log(e.target.value)
@@ -148,7 +168,7 @@ class DecisionAdd extends Component {
             <div>
                 <DecisionAddContext
                     decision={this.state.decision}
-                    handleInputDecisionChange={this.handleInputDecisionChange}
+                    handleDecisionInputChange={this.handleDecisionInputChange}
                     handleSelectDecisionCategoryChange={this.handleSelectDecisionCategoryChange} />
                 <DecisionMatrix
                     decision={this.state.decision}
