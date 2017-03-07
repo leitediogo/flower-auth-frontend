@@ -36,15 +36,23 @@ class DecisionAdd extends Component {
             choiceName: '',
             choiceDescription: ''
         }
+<<<<<<< HEAD
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleDecisionInputChange = this.handleDecisionInputChange.bind(this)
+=======
+
+        this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleDecisionInputChange = this.handleDecisionInputChange.bind(this)
+        this.handleSelectDecisionCategoryChange = this.handleSelectDecisionCategoryChange.bind(this)
+        this.handleSaveCriterion = this.handleSaveCriterion.bind(this)
+        this.handleSaveChoice = this.handleSaveChoice.bind(this)
+>>>>>>> 0928f27b0f41306e7cb20de04d00c5163d3a0953
         this.postDecision = this.postDecision.bind(this)
         this.handleSaveDecision = this.handleSaveDecision.bind(this)
         this.handleCancelDecision = this.handleCancelDecision.bind(this)
-        this.handleSaveCriterion = this.handleSaveCriterion.bind(this)
-        this.handleSaveChoice = this.handleSaveChoice.bind(this)
     }
 
+<<<<<<< HEAD
     //Load state for testing matrix
     //Causes warning: TextField is changing a controlled input of type text to be uncontrolled. Input elements should not switch from controlled to uncontrolled (or vice versa). Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://fb.me/react-controlled-components
     componentDidMount() {
@@ -64,6 +72,8 @@ class DecisionAdd extends Component {
         this.setState(change)
     }
 
+=======
+>>>>>>> 0928f27b0f41306e7cb20de04d00c5163d3a0953
     handleInputChange(e) {
         console.log('DecisionAdd::handleInputChange')
         console.log(e.target.id)
@@ -86,7 +96,7 @@ class DecisionAdd extends Component {
     }
 
     //TODO: Generalize selects per name
-    handleSelectDecisionCategoryChange = (event, index, value) => {
+    handleSelectDecisionCategoryChange(event, index, value) {
         console.log('DecisionAdd::handleSelectDecisionCategoryChange')
         let change = this.state
         change.decision.category = value
@@ -170,6 +180,7 @@ class DecisionAdd extends Component {
                     decision={this.state.decision}
                     handleDecisionInputChange={this.handleDecisionInputChange}
                     handleSelectDecisionCategoryChange={this.handleSelectDecisionCategoryChange} />
+                
                 <DecisionMatrix
                     decision={this.state.decision}
                     handleInputChange={this.handleInputChange}

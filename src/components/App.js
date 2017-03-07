@@ -49,12 +49,13 @@ const api_server_port = process.env.REACT_APP_API_SERVER_PORT
 
 class App extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
       //TODO: remove filtered decisions from state
       filteredDecisions: [],
       allDecisions: []
-    }
+    };
+    this.filterDecisions = this.filterDecisions.bind(this);
   }
 
   componentDidMount() {
@@ -85,7 +86,7 @@ class App extends Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
-          <DecisionAppBar filterDecisions={this.filterDecisions.bind(this)} />
+          <DecisionAppBar filterDecisions={this.filterDecisions} />
           <Router history={browserHistory}>
             <Route path="/" component={() => (<DecisionCardList decisions={this.state.filteredDecisions} />)} />
             {/* Testing Routes */}
