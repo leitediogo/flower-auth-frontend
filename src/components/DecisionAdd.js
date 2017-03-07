@@ -37,21 +37,28 @@ class DecisionAdd extends Component {
             choiceDescription: ''
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleDecisionInputChange = this.handleDecisionInputChange.bind(this)
 =======
+=======
+>>>>>>> 0928f27b0f41306e7cb20de04d00c5163d3a0953
 
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleDecisionInputChange = this.handleDecisionInputChange.bind(this)
         this.handleSelectDecisionCategoryChange = this.handleSelectDecisionCategoryChange.bind(this)
         this.handleSaveCriterion = this.handleSaveCriterion.bind(this)
         this.handleSaveChoice = this.handleSaveChoice.bind(this)
+<<<<<<< HEAD
+>>>>>>> 0928f27b0f41306e7cb20de04d00c5163d3a0953
+=======
 >>>>>>> 0928f27b0f41306e7cb20de04d00c5163d3a0953
         this.postDecision = this.postDecision.bind(this)
         this.handleSaveDecision = this.handleSaveDecision.bind(this)
         this.handleCancelDecision = this.handleCancelDecision.bind(this)
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     //Load state for testing matrix
     //Causes warning: TextField is changing a controlled input of type text to be uncontrolled. Input elements should not switch from controlled to uncontrolled (or vice versa). Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://fb.me/react-controlled-components
@@ -72,6 +79,8 @@ class DecisionAdd extends Component {
         this.setState(change)
     }
 
+=======
+>>>>>>> 0928f27b0f41306e7cb20de04d00c5163d3a0953
 =======
 >>>>>>> 0928f27b0f41306e7cb20de04d00c5163d3a0953
     handleInputChange(e) {
