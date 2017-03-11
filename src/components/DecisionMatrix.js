@@ -55,7 +55,7 @@ class DecisionMatrix extends Component {
 
     handleSaveCriteriaCell() {
         console.log('DecisionMatrix::handleSaveCriteriaCell')
-        this.props.handleSaveCriterion()        
+        this.props.handleSaveCriterion()
         this.handleCloseCriteriaModal()
     }
 
@@ -132,7 +132,7 @@ class DecisionMatrix extends Component {
                             <TableRow key={index}>
                                 <TableRowColumn key={index}>{choice.name}</TableRowColumn>
                                 {this.props.decision.criteria.map((criterion, index) => (
-                                    <TableRowColumn key={index}>-</TableRowColumn>
+                                    <TableRowColumn key={index}>{this.props.decision.info.filter(info => info.id === choice.id + ':' + criterion.id)[0].name}</TableRowColumn>
                                 ))}
                             </TableRow>
                         ))}

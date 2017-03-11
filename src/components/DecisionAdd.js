@@ -54,154 +54,165 @@ class DecisionAdd extends Component {
         let change = this.state
         change.decision = {
             criteria: [
-                { id: '22342', name: 'criteria1', description: 'desc Crit1' },
-                { id: '32432', name: 'criteria2', description: 'desc Crit2' },
-                { id: '4v345', name: 'criteria3', description: 'desc Crit3' }
+                { id: 2, name: 'criteria1', description: 'desc Crit1' },//Starts at 2 for cell handling
+                { id: 3, name: 'criteria2', description: 'desc Crit2' },
+                { id: 4, name: 'criteria3', description: 'desc Crit3' }
             ],
             choices: [
-                { id: '2523r45', name: 'choice1', description: 'desc Choice1' },
-                { id: '3234w25', name: 'choice2', description: 'desc Choice2' },
-                { id: '23ewr454', name: 'choice3', description: 'desc Choice3' }
+                { id: 2, name: 'choice1', description: 'desc Choice1' },
+                { id: 3, name: 'choice2', description: 'desc Choice2' },
+                { id: 4, name: 'choice3', description: 'desc Choice3' }
+            ],
+            info: [
+                { id: '2:2', name: 'choice1-crit1', description: 'teste1' },
+                { id: '2:3', name: 'choice1-crit2', description: 'teste2' },
+                { id: '2:4', name: 'choice1-crit3', description: 'teste3' },
+                { id: '3:2', name: 'choice2-crit1', description: 'teste4' },
+                { id: '3:3', name: 'choice2-crit2', description: 'teste5' },
+                { id: '3:4', name: 'choice2-crit3', description: 'teste6' },
+                { id: '4:2', name: 'choice3-crit1', description: 'teste7' },
+                { id: '4:3', name: 'choice3-crit2', description: 'teste8' },
+                { id: '4:4', name: 'choice3-crit3', description: 'teste9' },
             ]
-        }
+    }
         this.setState(change)
     }
 
-    handleInputChange(e) {
-        console.log('DecisionAdd::handleInputChange')
-        console.log(e.target.id)
-        console.log(e.target.value)
-        let change = this.state
-        change[e.target.id] = e.target.value
-        this.setState(change)
-        console.log(this.state)
-    }
+handleInputChange(e) {
+    console.log('DecisionAdd::handleInputChange')
+    console.log(e.target.id)
+    console.log(e.target.value)
+    let change = this.state
+    change[e.target.id] = e.target.value
+    this.setState(change)
+    console.log(this.state)
+}
 
-    //TODO: Remove this, find a way to pass id with . in fields
-    handleDecisionInputChange(e) {
-        console.log('DecisionAdd::handleDecisionInputChange')
-        console.log(e.target.id)
-        console.log(e.target.value)
-        let change = this.state
-        change.decision[e.target.id] = e.target.value
-        this.setState(change)
-        console.log(this.state)
-    }
+//TODO: Remove this, find a way to pass id with . in fields
+handleDecisionInputChange(e) {
+    console.log('DecisionAdd::handleDecisionInputChange')
+    console.log(e.target.id)
+    console.log(e.target.value)
+    let change = this.state
+    change.decision[e.target.id] = e.target.value
+    this.setState(change)
+    console.log(this.state)
+}
 
-    //TODO: Generalize selects per name
-    handleSelectDecisionCategoryChange(event, index, value) {
-        console.log('DecisionAdd::handleSelectDecisionCategoryChange')
-        let change = this.state
-        change.decision.category = value
-        this.setState(change)
-        console.log(this.state)
-    }
+//TODO: Generalize selects per name
+handleSelectDecisionCategoryChange(event, index, value) {
+    console.log('DecisionAdd::handleSelectDecisionCategoryChange')
+    let change = this.state
+    change.decision.category = value
+    this.setState(change)
+    console.log(this.state)
+}
 
-    handleSaveCriterion() {
-        console.log('DecisionAdd::handleSaveCriterion')
-        let uuid = utils.generateUUID()//uuid for criterion
-        let criterionToAdd = {
-            id: uuid,
-            name: this.state.criterionName,
-            description: this.state.criterionDescription,
-        }
-        let change = this.state
-        change.decision.criteria.push(criterionToAdd)
-        this.setState(change)
-        console.log(this.state.decision)
-        this.setState({ criterionName: '', criterionDescription: '' })
+handleSaveCriterion() {
+    console.log('DecisionAdd::handleSaveCriterion')
+    let uuid = utils.generateUUID()//uuid for criterion
+    let criterionToAdd = {
+        id: uuid,
+        name: this.state.criterionName,
+        description: this.state.criterionDescription,
     }
+    let change = this.state
+    change.decision.criteria.push(criterionToAdd)
+    this.setState(change)
+    console.log(this.state.decision)
+    this.setState({ criterionName: '', criterionDescription: '' })
+}
 
-    handleSaveChoice() {
-        console.log('DecisionAdd::handleSaveChoice')
-        let uuid = utils.generateUUID()//uuid for choice
-        console.log(uuid)
-        let choiceToAdd = {
-            id: uuid,
-            name: this.state.choiceName,
-            description: this.state.choiceDescription,
-        }
-        let change = this.state
-        change.decision.choices.push(choiceToAdd)
-        this.setState(change)
-        console.log(this.state.decision)
-        this.setState({ choiceName: '', choiceDescription: '' })
+handleSaveChoice() {
+    console.log('DecisionAdd::handleSaveChoice')
+    let uuid = utils.generateUUID()//uuid for choice
+    console.log(uuid)
+    let choiceToAdd = {
+        id: uuid,
+        name: this.state.choiceName,
+        description: this.state.choiceDescription,
     }
+    let change = this.state
+    change.decision.choices.push(choiceToAdd)
+    this.setState(change)
+    console.log(this.state.decision)
+    this.setState({ choiceName: '', choiceDescription: '' })
+}
 
-    //TODO: Handle Error
-    postDecision() {
-        console.log('DecisionAdd::postDecision')
-        agent.post('http://' + api_server_name + ':' + api_server_port + '/api/Decisions')
-            .send({
-                //id is auto generated by loopback
-                name: this.state.decision.name,
-                content: this.state.decision
-            })
-            .set('Accept', 'application/json')
-            .end(function (err, res) {
-                if (err || !res.ok) {
-                    console.error(err);
-                } else {
-                    console.log('yay! decision posted ' + JSON.stringify(res.body));
-                }
-            })
-    }
+//TODO: Handle Error
+postDecision() {
+    console.log('DecisionAdd::postDecision')
+    agent.post('http://' + api_server_name + ':' + api_server_port + '/api/Decisions')
+        .send({
+            //id is auto generated by loopback
+            name: this.state.decision.name,
+            content: this.state.decision
+        })
+        .set('Accept', 'application/json')
+        .end(function (err, res) {
+            if (err || !res.ok) {
+                console.error(err);
+            } else {
+                console.log('yay! decision posted ' + JSON.stringify(res.body));
+            }
+        })
+}
 
-    handleSaveDecision() {
-        console.log('DecisionAdd::handleSaveDecision')
-        //Generate Decision internal id
-        let uuid = utils.generateUUID()
-        let change = this.state
-        change.decision['id'] = uuid
-        this.setState(change)
-        //Post Decision
-        this.postDecision()
-        browserHistory.push('/');
-        //TODO: eliminate window.location.reload()
-        window.location.reload()
-    }
+handleSaveDecision() {
+    console.log('DecisionAdd::handleSaveDecision')
+    //Generate Decision internal id
+    let uuid = utils.generateUUID()
+    let change = this.state
+    change.decision['id'] = uuid
+    this.setState(change)
+    //Post Decision
+    this.postDecision()
+    browserHistory.push('/');
+    //TODO: eliminate window.location.reload()
+    window.location.reload()
+}
 
-    handleCancelDecision() {
-        console.log('DecisionAdd::handleCancelDecision')
-        browserHistory.push('/')
-    }
+handleCancelDecision() {
+    console.log('DecisionAdd::handleCancelDecision')
+    browserHistory.push('/')
+}
 
-    render() {
-        return (
-            <div>
-                <DecisionContext
-                    decision={this.state.decision}
-                    handleDecisionInputChange={this.handleDecisionInputChange}
-                    handleSelectDecisionCategoryChange={this.handleSelectDecisionCategoryChange} />
-                <DecisionMatrix
-                    decision={this.state.decision}
-                    handleInputChange={this.handleInputChange}
-                    handleSaveCriterion={this.handleSaveCriterion}
-                    handleSaveChoice={this.handleSaveChoice}
-                    criterionName={this.state.criterionName}
-                    criterionDescription={this.state.criterionDescription}
-                    choiceName={this.state.choiceName}
-                    choiceDescription={this.state.choiceDescription} />
-                  <hr/>  
-                <div style={{ marginTop: 12 }}>
-                    <FlatButton
-                        label="Cancel"
-                        onTouchTap={this.handleCancelDecision}
-                        style={{ marginRight: 12 }}
-                    />
-                    <RaisedButton
-                        label="Save Decision"
-                        primary={true}
-                        onTouchTap={this.handleSaveDecision}
-                    />
-                </div>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
+render() {
+    return (
+        <div>
+            <DecisionContext
+                decision={this.state.decision}
+                handleDecisionInputChange={this.handleDecisionInputChange}
+                handleSelectDecisionCategoryChange={this.handleSelectDecisionCategoryChange} />
+            <DecisionMatrix
+                decision={this.state.decision}
+                handleInputChange={this.handleInputChange}
+                handleSaveCriterion={this.handleSaveCriterion}
+                handleSaveChoice={this.handleSaveChoice}
+                criterionName={this.state.criterionName}
+                criterionDescription={this.state.criterionDescription}
+                choiceName={this.state.choiceName}
+                choiceDescription={this.state.choiceDescription} />
+            <hr />
+            <div style={{ marginTop: 12 }}>
+                <FlatButton
+                    label="Cancel"
+                    onTouchTap={this.handleCancelDecision}
+                    style={{ marginRight: 12 }}
+                />
+                <RaisedButton
+                    label="Save Decision"
+                    primary={true}
+                    onTouchTap={this.handleSaveDecision}
+                />
             </div>
-        );
-    }
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+    );
+}
 }
 
 export default connectProfile(DecisionAdd)
