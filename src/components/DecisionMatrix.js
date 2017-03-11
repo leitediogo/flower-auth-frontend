@@ -117,8 +117,6 @@ class DecisionMatrix extends Component {
             <div style={{ marginLeft: 12, marginRight: 12 }}>
                 <br />
                 <br />
-                <FlatButton label="Add Choices" onTouchTap={this.handleOpenChoiceModal} />
-                <FlatButton label="Add Criteria" onTouchTap={this.handleOpenCriteriaModal} />
                 <Table onCellClick={this.handleOpenInfoModal}>
                     <TableBody displayRowCheckbox={false} >
                         <TableRow />
@@ -132,13 +130,17 @@ class DecisionMatrix extends Component {
                             <TableRow key={index}>
                                 <TableRowColumn key={index}>{choice.name}</TableRowColumn>
                                 {this.props.decision.criteria.map((criterion, index) => (
+                                    /* <TableRowColumn key={index}>-</TableRowColumn>*/
                                     <TableRowColumn key={index}>{this.props.decision.info.filter(info => info.id === choice.id + ':' + criterion.id)[0].name}</TableRowColumn>
                                 ))}
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
-                <FlatButton label="+" onTouchTap={this.handleOpenChoiceModal} />
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <FlatButton label="Add Choice" onTouchTap={this.handleOpenChoiceModal} />
+                    <FlatButton label="Add Criterion" onTouchTap={this.handleOpenCriteriaModal} />
+                </div>
                 <Dialog
                     title="Add Criteria"
                     actions={criteriaModalActions}
