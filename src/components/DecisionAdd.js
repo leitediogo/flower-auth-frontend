@@ -52,6 +52,8 @@ class DecisionAdd extends Component {
     //Causes warning: TextField is changing a controlled input of type text to be uncontrolled. Input elements should not switch from controlled to uncontrolled (or vice versa). Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://fb.me/react-controlled-components
     //Handle when empty array ,first time
     componentDidMount() {
+        console.log('DecisionAdd::componentDidMount')
+        /*
         let change = this.state
         change.decision = {
             choices: [
@@ -60,7 +62,7 @@ class DecisionAdd extends Component {
                 { id: 4, name: 'choice3', description: 'desc Choice3' }
             ],
             criteria: [
-                { id: 2, name: 'criteria1', description: 'desc Crit1' },//Starts at 2 for cell handling
+                { id: 2, name: 'criteria1', description: 'desc Crit1' },
                 { id: 3, name: 'criteria2', description: 'desc Crit2' },
                 { id: 4, name: 'criteria3', description: 'desc Crit3' }
             ],
@@ -77,6 +79,7 @@ class DecisionAdd extends Component {
             ]
         }
         this.setState(change)
+        */
     }
 
 
@@ -114,7 +117,11 @@ class DecisionAdd extends Component {
         console.log('DecisionAdd::handleSaveCriterion')
         //let uuid = utils.generateUUID()//uuid for criterion
         let change = this.state
-        let criterionId = this.state.decision.criteria[this.state.decision.criteria.length - 1].id + 1
+        let criterionId
+        if (this.state.decision.criteria.length === 0) { criterionId = 2 }
+        else {
+            criterionId = this.state.decision.criteria[this.state.decision.criteria.length - 1].id + 1
+        }
         let criterionToAdd = {
             id: criterionId,
             name: this.state.criterionName,
@@ -122,6 +129,7 @@ class DecisionAdd extends Component {
         }
         change.decision.criteria.push(criterionToAdd)
         //Add info cells to state
+        /*
         this.state.decision.choices.map((choice) => {
             console.log('Info added by adding criteria: ', choice.id + ':' + criterionId)
             let infoToAdd = {
@@ -131,6 +139,7 @@ class DecisionAdd extends Component {
             }
             change.decision.info.push(infoToAdd)
         })
+        */
         this.setState(change)
         this.setState({ criterionName: '', criterionDescription: '' })
         console.log(this.state)
@@ -140,7 +149,11 @@ class DecisionAdd extends Component {
         console.log('DecisionAdd::handleSaveChoice')
         //let uuid = utils.generateUUID()//uuid for choice
         let change = this.state
-        let choiceId = this.state.decision.choices[this.state.decision.choices.length - 1].id + 1
+        let choiceId
+        if (this.state.decision.choices.length === 0) { choiceId = 2 }
+        else {
+            choiceId = this.state.decision.choices[this.state.decision.choices.length - 1].id + 1
+        }
         console.log('DecisionAdd::Id choice - ', choiceId)
         let choiceToAdd = {
             id: choiceId,
@@ -149,6 +162,15 @@ class DecisionAdd extends Component {
         }
         change.decision.choices.push(choiceToAdd)
         //Add info cells to state
+        if (this.state.decision.criteria.length === 0) {
+            console.log('DecisionAdd:: criteria empty')
+        } else {
+            this.state.decision.criteria.map((criteria) => {
+                console.log('DecisionAdd:: criteria filled', criteria)
+            }
+            )
+        }
+        /*
         this.state.decision.criteria.map((criteria) => {
             console.log('Info added by adding choice: ', choiceId + ':' + criteria.id)
             let infoToAdd = {
@@ -157,7 +179,7 @@ class DecisionAdd extends Component {
                 description: ''
             }
             change.decision.info.push(infoToAdd)
-        })
+        })*/
         this.setState(change)
         this.setState({ choiceName: '', choiceDescription: '' })
         console.log(this.state.decision)
