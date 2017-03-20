@@ -130,8 +130,8 @@ class DecisionMatrix extends Component {
                             <TableRow key={index}>
                                 <TableRowColumn key={index}>{choice.name}</TableRowColumn>
                                 {this.props.decision.criteria.map((criterion, index) => (
-                                   <TableRowColumn key={index}>-</TableRowColumn>
-                                    /*  <TableRowColumn key={index}>{this.props.decision.info.filter(info => info.id === choice.id + ':' + criterion.id)[0].name}</TableRowColumn>*/
+                                   /*<TableRowColumn key={index}>-</TableRowColumn>*/
+                                    <TableRowColumn key={index}>{this.props.decision.info.filter(info => info.id === choice.id + ':' + criterion.id)[0].name}</TableRowColumn>
                                 ))}
                             </TableRow>
                         ))}

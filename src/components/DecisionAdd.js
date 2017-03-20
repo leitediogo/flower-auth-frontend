@@ -7,7 +7,7 @@ import { browserHistory } from 'react-router'
 import { connectProfile } from '../auth'
 import DecisionContext from './DecisionContext'
 import DecisionMatrix from './DecisionMatrix'
-
+import DecisionAddParticipants from './DecisionAddParticipants'
 const api_server_name = process.env.REACT_APP_API_SERVER_NAME
 const api_server_port = process.env.REACT_APP_API_SERVER_PORT
 
@@ -46,6 +46,7 @@ class DecisionAdd extends Component {
         this.postDecision = this.postDecision.bind(this)
         this.handleSaveDecision = this.handleSaveDecision.bind(this)
         this.handleCancelDecision = this.handleCancelDecision.bind(this)
+        this.handleSaveParticipant = this.handleSaveParticipant.bind(this)
     }
 
     //Load some state in criteria and choices for testing matrix
@@ -113,6 +114,17 @@ class DecisionAdd extends Component {
         console.log(this.state)
     }
 
+    handleSaveParticipant(name, role) {
+        console.log('DecisionAdd::handleSaveParticipant')
+        let change = this.state
+        let participantToPush = {
+            role: role,
+            name: name
+        }
+        change.decision.participants.push(participantToPush)
+        this.setState(change)
+    }
+
     handleSaveCriterion() {
         console.log('DecisionAdd::handleSaveCriterion')
         //let uuid = utils.generateUUID()//uuid for criterion
@@ -129,7 +141,6 @@ class DecisionAdd extends Component {
         }
         change.decision.criteria.push(criterionToAdd)
         //Add info cells to state
-        /*
         this.state.decision.choices.map((choice) => {
             console.log('Info added by adding criteria: ', choice.id + ':' + criterionId)
             let infoToAdd = {
@@ -139,7 +150,7 @@ class DecisionAdd extends Component {
             }
             change.decision.info.push(infoToAdd)
         })
-        */
+
         this.setState(change)
         this.setState({ criterionName: '', criterionDescription: '' })
         console.log(this.state)
@@ -170,7 +181,6 @@ class DecisionAdd extends Component {
             }
             )
         }
-        /*
         this.state.decision.criteria.map((criteria) => {
             console.log('Info added by adding choice: ', choiceId + ':' + criteria.id)
             let infoToAdd = {
@@ -179,13 +189,13 @@ class DecisionAdd extends Component {
                 description: ''
             }
             change.decision.info.push(infoToAdd)
-        })*/
+        })
         this.setState(change)
         this.setState({ choiceName: '', choiceDescription: '' })
         console.log(this.state.decision)
     }
 
-    //TODO: Handle Error
+    //TODO: Handle Error //check
     postDecision() {
         console.log('DecisionAdd::postDecision')
         agent.post('http://' + api_server_name + ':' + api_server_port + '/api/Decisions')
@@ -230,6 +240,10 @@ class DecisionAdd extends Component {
                     decision={this.state.decision}
                     handleDecisionInputChange={this.handleDecisionInputChange}
                     handleSelectDecisionCategoryChange={this.handleSelectDecisionCategoryChange} />
+                <br/><br/>
+                <DecisionAddParticipants
+                    decision={this.state.decision}
+                    handleSaveParticipant={this.handleSaveParticipant} />
                 <DecisionMatrix
                     decision={this.state.decision}
                     handleInputChange={this.handleInputChange}
