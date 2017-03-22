@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, TableRow, TableBody, TableRowColumn, TableHeader, TableHeaderColumn } from 'material-ui/Table'
+import { Table, TableRow, TableBody, TableRowColumn } from 'material-ui/Table'
 import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
