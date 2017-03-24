@@ -23,7 +23,6 @@ import TestMatrix from './TestMatrix'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin()
 
-
 //pallete layout definition below
 const muiTheme = getMuiTheme({
   //spacing: 30,
@@ -45,7 +44,6 @@ const muiTheme = getMuiTheme({
     //shadowColor: 'green',
   }
 })
-
 
 const api_server_name = process.env.REACT_APP_API_SERVER_NAME
 const api_server_port = process.env.REACT_APP_API_SERVER_PORT
@@ -85,7 +83,7 @@ class App extends Component {
       })
     }
   }
-  
+
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -103,9 +101,11 @@ class App extends Component {
               {/* Place all authenticated routes here */}
               <Route path="/profile/edit" component={EditProfile} />
               <Route path="/decisionadd" component={DecisionAdd} />
-              <Route path="/testprofile" component={TestProfile} />
               <Route path="/decisionparticipate" component={DecisionParticipate} />
               <Route path="/decisionview" component={DecisionView} />
+              {/* Testing Routes */}
+              <Route path="/testprofile" component={TestProfile} />
+              {/* End Testing Routes */}
             </Route>
           </Router>
           <DecisionBottomNavigation />

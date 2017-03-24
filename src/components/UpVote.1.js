@@ -8,7 +8,8 @@ import ThumbDown from 'material-ui/svg-icons/action/thumb-down'
 import Delete from 'material-ui/svg-icons/action/delete'
 import { connectProfile } from '../auth'
 
-//TODO::Add number of comments to top
+//Add number of comments to top
+//Change comment to bellow 
 
 let styles = {
     cardStyle: {
@@ -41,12 +42,13 @@ let styles = {
 class UpVote extends Component {
 
     constructor() {
+        console.log('UpVote::constructor')
         super()
         this.state = {
             list: [],
             topRecord: {
-                title: '',
-                description: '',
+                title: 'init',
+                description: 'init',
                 votes: 0
             },
             title: '',
@@ -57,21 +59,21 @@ class UpVote extends Component {
 
     handleAddToList() {
         console.log('UpVote::handleAddToList')
-        const { profile } = this.props
+        const {profile} = this.props
         const newlist = this.state.list.concat({
             title: this.state.title,
             description: this.state.description,
             avatar: profile.picture,
             votes: 0,
-            voted: false
+            blockThumbUp: false,
+            blockThumbDown: true
         });
         this.setState({ list: newlist, title: '', description: '' })
         //TODO: persist decision for realtime
     }
 
-
+    //TODO: Only creator removes
     handleRemove(i) {
-        //TODO: Only creator removes
         console.log('UpVote::handleRemove')
         let newlist = this.state.list.slice()
         newlist.splice(i, 1);
@@ -87,31 +89,33 @@ class UpVote extends Component {
         console.log(this.state)
     }
 
-    handleVote = (i) => {
-        console.log('UpVote::handleVote: ', i)
+    handleThumbUp = (i) => {
+        console.log('UpVote::handleThumbUp: ', i)
         let change = this.state
         change.list[i].votes += 1
-        change.list[i].voted = true
+        change.list[i].blockThumbUp = true
+        change.list[i].blockThumbDown = false
         this.setState(change)
         //Sort list
         this.sortListOfObjects(this.state.list, 'votes')
         //set infoValue state on upper component
-        //this.props.handleInfoValue(this.state.list[0].title)
+        this.props.handleInfoValue(this.state.list[0].title)
         //update Top Record
         this.setState({ topRecord: this.state.list[0] })
         //TODO: persist decision for realtime
     }
 
-    handleUnvote = (i) => {
-        console.log('UpVote::handleUnvote: ', i)
+    handleThumbDown = (i) => {
+        console.log('UpVote::handleThumbDown: ', i)
         let change = this.state
         change.list[i].votes -= 1
-        change.list[i].voted = false
+        change.list[i].blockThumbUp = false
+        change.list[i].blockThumbDown = true
         this.setState(change)
         //sort list
         this.sortListOfObjects(this.state.list, 'votes')
         //set infoValue state on upper component
-        //this.props.handleInfoValue(this.state.list[0].title)
+        this.props.handleInfoValue(this.state.list[0].title)
         //update Top Record
         this.setState({ topRecord: this.state.list[0] })
         //TODO: persist decision for realtime
@@ -138,8 +142,8 @@ class UpVote extends Component {
                         </div>
                         <div style={styles.divStyleRight}>
                             <b>{info.votes}&nbsp;</b>
-                            <ThumbUp style={styles.iconStyle} onClick={info.voted ? () => console.log('noUP') : () => this.handleVote(i)} />
-                            <ThumbDown style={styles.iconStyle} onClick={!info.voted ? () => console.log('noDOWN') : () => this.handleUnvote(i)} />
+                            <ThumbUp style={styles.iconStyle} onClick={info.blockThumbUp ? () => console.log('noUP') : () => this.handleThumbUp(i)} />
+                            <ThumbDown style={styles.iconStyle} onClick={info.blockThumbDown ? () => console.log('noDOWN') : () => this.handleThumbDown(i)} />
                             <div>
                                 <center>
                                     <Delete style={styles.iconStyle} onClick={() => this.handleRemove(i)} />

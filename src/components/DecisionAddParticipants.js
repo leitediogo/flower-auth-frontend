@@ -60,7 +60,6 @@ class DecisionAddParticipants extends Component {
         return (
             <div style={{ marginLeft: 12, marginRight: 40 }}>
                 <Table>
-                    
                     <TableBody displayRowCheckbox={false} >
                         {this.props.decision.participants.map((row, index) => (
                             <TableRow key={index} selected={row.selected}>
@@ -71,7 +70,7 @@ class DecisionAddParticipants extends Component {
                         ))}
                     </TableBody>
                 </Table>
-                <FlatButton label="Invite" onTouchTap={this.handleOpenModal} />
+                <FlatButton label="Invite Participants" onTouchTap={this.handleOpenModal} />
                 <Dialog
                     title="Add Participant"
                     actions={this.actions}

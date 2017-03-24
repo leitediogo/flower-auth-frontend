@@ -8,6 +8,8 @@ import { connectProfile } from '../auth'
 import DecisionContext from './DecisionContext'
 import DecisionMatrix from './DecisionMatrix'
 import DecisionAddParticipants from './DecisionAddParticipants'
+import Divider from 'material-ui/Divider'
+
 const api_server_name = process.env.REACT_APP_API_SERVER_NAME
 const api_server_port = process.env.REACT_APP_API_SERVER_PORT
 
@@ -48,41 +50,6 @@ class DecisionAdd extends Component {
         this.handleCancelDecision = this.handleCancelDecision.bind(this)
         this.handleSaveParticipant = this.handleSaveParticipant.bind(this)
     }
-
-    //Load some state in criteria and choices for testing matrix
-    //Causes warning: TextField is changing a controlled input of type text to be uncontrolled. Input elements should not switch from controlled to uncontrolled (or vice versa). Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://fb.me/react-controlled-components
-    //Handle when empty array ,first time
-    componentDidMount() {
-        console.log('DecisionAdd::componentDidMount')
-        /*
-        let change = this.state
-        change.decision = {
-            choices: [
-                { id: 2, name: 'choice1', description: 'desc Choice1' },
-                { id: 3, name: 'choice2', description: 'desc Choice2' },
-                { id: 4, name: 'choice3', description: 'desc Choice3' }
-            ],
-            criteria: [
-                { id: 2, name: 'criteria1', description: 'desc Crit1' },
-                { id: 3, name: 'criteria2', description: 'desc Crit2' },
-                { id: 4, name: 'criteria3', description: 'desc Crit3' }
-            ],
-            info: [
-                { id: '2:2', name: 'choice1-crit1', description: 'teste1' },
-                { id: '2:3', name: 'choice1-crit2', description: 'teste2' },
-                { id: '2:4', name: 'choice1-crit3', description: 'teste3' },
-                { id: '3:2', name: 'choice2-crit1', description: 'teste4' },
-                { id: '3:3', name: 'choice2-crit2', description: 'teste5' },
-                { id: '3:4', name: 'choice2-crit3', description: 'teste6' },
-                { id: '4:2', name: 'choice3-crit1', description: 'teste7' },
-                { id: '4:3', name: 'choice3-crit2', description: 'teste8' },
-                { id: '4:4', name: 'choice3-crit3', description: 'teste9' },
-            ]
-        }
-        this.setState(change)
-        */
-    }
-
 
     handleInputChange(e) {
         console.log('DecisionAdd::handleInputChange')
@@ -127,7 +94,6 @@ class DecisionAdd extends Component {
 
     handleSaveCriterion() {
         console.log('DecisionAdd::handleSaveCriterion')
-        //let uuid = utils.generateUUID()//uuid for criterion
         let change = this.state
         let criterionId
         if (this.state.decision.criteria.length === 0) { criterionId = 2 }
@@ -137,20 +103,21 @@ class DecisionAdd extends Component {
         let criterionToAdd = {
             id: criterionId,
             name: this.state.criterionName,
-            description: this.state.criterionDescription,
+            description: this.state.criterionDescription
         }
         change.decision.criteria.push(criterionToAdd)
         //Add info cells to state
-        this.state.decision.choices.map((choice) => {
+        let infoToAdd
+        this.state.decision.choices.map(choice => {
             console.log('Info added by adding criteria: ', choice.id + ':' + criterionId)
-            let infoToAdd = {
+            infoToAdd = {
                 id: choice.id + ':' + criterionId,
                 name: '-',
                 description: ''
             }
             change.decision.info.push(infoToAdd)
+            return choice //to eliminate warning 'Expected to return a value in this function  array-callback-return'
         })
-
         this.setState(change)
         this.setState({ criterionName: '', criterionDescription: '' })
         console.log(this.state)
@@ -158,13 +125,10 @@ class DecisionAdd extends Component {
 
     handleSaveChoice() {
         console.log('DecisionAdd::handleSaveChoice')
-        //let uuid = utils.generateUUID()//uuid for choice
-        let change = this.state
         let choiceId
+        let change = this.state
         if (this.state.decision.choices.length === 0) { choiceId = 2 }
-        else {
-            choiceId = this.state.decision.choices[this.state.decision.choices.length - 1].id + 1
-        }
+        else { choiceId = this.state.decision.choices[this.state.decision.choices.length - 1].id + 1 }
         console.log('DecisionAdd::Id choice - ', choiceId)
         let choiceToAdd = {
             id: choiceId,
@@ -173,29 +137,22 @@ class DecisionAdd extends Component {
         }
         change.decision.choices.push(choiceToAdd)
         //Add info cells to state
-        if (this.state.decision.criteria.length === 0) {
-            console.log('DecisionAdd:: criteria empty')
-        } else {
-            this.state.decision.criteria.map((criteria) => {
-                console.log('DecisionAdd:: criteria filled', criteria)
-            }
-            )
-        }
-        this.state.decision.criteria.map((criteria) => {
-            console.log('Info added by adding choice: ', choiceId + ':' + criteria.id)
-            let infoToAdd = {
+        let infoToAdd
+        this.state.decision.criteria.map(criteria => {
+            infoToAdd = {
                 id: choiceId + ':' + criteria.id,
                 name: '-',
                 description: ''
             }
             change.decision.info.push(infoToAdd)
+            return criteria //to eliminate warning 'Expected to return a value in this function  array-callback-return'
         })
         this.setState(change)
         this.setState({ choiceName: '', choiceDescription: '' })
         console.log(this.state.decision)
     }
 
-    //TODO: Handle Error //check
+    //TODO: Handle Error 
     postDecision() {
         console.log('DecisionAdd::postDecision')
         agent.post('http://' + api_server_name + ':' + api_server_port + '/api/Decisions')
@@ -240,7 +197,7 @@ class DecisionAdd extends Component {
                     decision={this.state.decision}
                     handleDecisionInputChange={this.handleDecisionInputChange}
                     handleSelectDecisionCategoryChange={this.handleSelectDecisionCategoryChange} />
-                <br/><br/>
+                <br /><br />
                 <DecisionAddParticipants
                     decision={this.state.decision}
                     handleSaveParticipant={this.handleSaveParticipant} />
@@ -253,7 +210,8 @@ class DecisionAdd extends Component {
                     criterionDescription={this.state.criterionDescription}
                     choiceName={this.state.choiceName}
                     choiceDescription={this.state.choiceDescription} />
-                <hr />
+                <br />
+                <Divider />
                 <div style={{ marginTop: 12 }}>
                     <FlatButton
                         label="Cancel"

@@ -117,26 +117,29 @@ class DecisionMatrix extends Component {
             <div style={{ marginLeft: 12, marginRight: 12 }}>
                 <br />
                 <br />
-                <Table onCellClick={this.handleOpenInfoModal}>
-                    <TableBody displayRowCheckbox={false} >
-                        <TableRow />
-                        <TableRow>
-                            <TableRowColumn> DECISION </TableRowColumn>
-                            {this.props.decision.criteria.map((criterion, index) => (
-                                <TableRowColumn key={index}>{criterion.name}</TableRowColumn>
-                            ))}
-                        </TableRow>
-                        {this.props.decision.choices.map((choice, index) => (
-                            <TableRow key={index}>
-                                <TableRowColumn key={index}>{choice.name}</TableRowColumn>
+                {/*Only shows table if criteria or choice with values*/}
+                {(this.props.decision.choices.length === 0 && this.props.decision.criteria.length === 0) ? '' :
+                    <Table onCellClick={this.handleOpenInfoModal}>
+                        <TableBody displayRowCheckbox={false} >
+                            <TableRow />
+                            <TableRow>
+                                <TableRowColumn> DECISION </TableRowColumn>
                                 {this.props.decision.criteria.map((criterion, index) => (
-                                   /*<TableRowColumn key={index}>-</TableRowColumn>*/
-                                    <TableRowColumn key={index}>{this.props.decision.info.filter(info => info.id === choice.id + ':' + criterion.id)[0].name}</TableRowColumn>
+                                    <TableRowColumn key={index}>{criterion.name}</TableRowColumn>
                                 ))}
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                            {this.props.decision.choices.map((choice, index) => (
+                                <TableRow key={index}>
+                                    <TableRowColumn key={index}>{choice.name}</TableRowColumn>
+                                    {this.props.decision.criteria.map((criterion, index) => (
+                                        /*<TableRowColumn key={index}>-</TableRowColumn>*/
+                                        <TableRowColumn key={index}>{this.props.decision.info.filter(info => info.id === choice.id + ':' + criterion.id)[0].name}</TableRowColumn>
+                                    ))}
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                }
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <FlatButton label="Add Choice" onTouchTap={this.handleOpenChoiceModal} />
                     <FlatButton label="Add Criterion" onTouchTap={this.handleOpenCriteriaModal} />
