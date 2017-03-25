@@ -13,6 +13,7 @@ class DecisionContext extends Component {
                     floatingLabelText="Decision Name"
                     value={this.props.decision.name}
                     onChange={this.props.handleDecisionInputChange}
+                    //fullWidth={true}
                 />
                 <br />
                 <TextField
@@ -22,7 +23,7 @@ class DecisionContext extends Component {
                     value={this.props.decision.description}
                     onChange={this.props.handleDecisionInputChange}
                     multiLine={true}
-                    rows={2}
+                    //fullWidth={true}
                 />
                 <br />
                 <SelectField
